@@ -5,9 +5,9 @@
 Für das Projekt werden 3 `Activities` benötigt. Jeder Screen der App wird über eine `Activity` realisiert. Für jede `Activity` muss auch ein eigenes Layout als XML erstellt werden.
 
 <div style="display:flex">
-    <img style="margin:3px;" src="../images/02-snake-01.png" title="Snake 01" alt="Snake 01">
-    <img style="margin:3px;" src="../images/02-snake-02.png" title="Snake 02" alt="Snake 02">
-    <img style="margin:3px;" src="../images/02-snake-03.png" title="Snake 03" alt="Snake 03">
+    <img style="margin:3px; max-width:33%;" src="../images/02-snake-01.png" title="Snake 01" alt="Snake 01">
+    <img style="margin:3px; max-width:33%;" src="../images/02-snake-02.png" title="Snake 02" alt="Snake 02">
+    <img style="margin:3px; max-width:33%;" src="../images/02-snake-03.png" title="Snake 03" alt="Snake 03">
 </div>
 
 Am Startscreen (`MainActivity`) finden sich 3 `Buttons`, welche jeweils über einen `Intent` die `GameActivity` starten. Dabei soll der `Intent` über ein `Extra` den Parameter `speed` übergeben. Der Parameter bestimmt dabei wie schnell sich die Schlange bewegen soll. Jenachdem welcher der 3 `Buttons` geklickt wurde, ist dies eben ein anderer Wert.
@@ -24,7 +24,423 @@ Es steht eine Ausgangsbasis für das Projekt bereit. Dieses ist über Gitlab zu 
 
 ## Klasse Snake
 
-Innerhalb der Klasse `Snake` befindet sich die gesamte Spiellogik.
+Innerhalb der Klasse `Snake` befindet sich die gesamte Spiellogik. Das Spielbrett ist als 2-dimensionales Array abgebildet. Im unten angeführten Beispiel wird beispielhaft ein Snake-Spiel innerhalb eines 6x6-Grid gezeigt. Dabei ist ein Apfel als `-1`, der Schlangenkopf als `-2` und die leeren Felder als `0` angezeigt. Der Schlangenkörper besteht aus Zahlen `größer 0` und erhöht sich in jedem Zug.
+
+<style>	
+	#game {
+		display:grid;
+		grid-template-columns:1fr 1fr 1fr 1fr;
+	}
+	#game h2 {
+		font-size:12px;
+	}
+	#game .grid {
+		display:grid;
+		grid-template-columns: 20px 20px 20px 20px 20px 20px;
+		grid-template-rows: 20px 20px 20px 20px 20px 20px;
+	}
+	#game .grid > div {
+		border:1px solid black;
+		display:flex;
+		justify-content:center;
+		align-items:center;
+	}
+</style>
+
+<section id="game">
+<div class="grid-description">
+	<h2>Start</h2>
+	<div class="grid">
+
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		
+		<div>0</div>
+		<div>1</div>
+		<div>-2</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>-1</div>
+		<div>0</div>
+		
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		
+	</div>
+</div>
+
+<div class="grid-description">
+	<h2>Bewegung nach Rechts</h2>
+	<div class="grid">
+
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		
+		<div>0</div>
+		<div>0</div>
+		<div>2</div>
+		<div>-2</div>
+		<div>0</div>
+		<div>0</div>
+		
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>-1</div>
+		<div>0</div>
+		
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		
+	</div>
+</div>
+
+<div class="grid-description">
+	<h2>Bewegung nach Rechts</h2>
+	<div class="grid">
+
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>3</div>
+		<div>-2</div>
+		<div>0</div>
+		
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>-1</div>
+		<div>0</div>
+		
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		
+	</div>
+</div>
+
+<div class="grid-description">
+	<h2>Bewegung nach Unten</h2>
+	<div class="grid">
+
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>3</div>
+		<div>4</div>
+		<div>0</div>
+		
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>-2</div>
+		<div>0</div>
+		
+		<div>0</div>
+		<div>-1</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		
+	</div>
+</div>
+
+<div class="grid-description">
+	<h2>Bewegung nach Unten</h2>
+	<div class="grid">
+
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>4</div>
+		<div>0</div>
+		
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>5</div>
+		<div>0</div>
+		
+		<div>0</div>
+		<div>-1</div>
+		<div>0</div>
+		<div>0</div>
+		<div>-2</div>
+		<div>0</div>
+		
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		
+	</div>
+</div>
+
+<div class="grid-description">
+	<h2>Bewegung nach Links</h2>
+	<div class="grid">
+
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>5</div>
+		<div>0</div>
+		
+		<div>0</div>
+		<div>-1</div>
+		<div>0</div>
+		<div>-2</div>
+		<div>6</div>
+		<div>0</div>
+		
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		
+	</div>
+</div>
+
+<div class="grid-description">
+	<h2>Bewegung nach Links</h2>
+	<div class="grid">
+
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		
+		<div>0</div>
+		<div>-1</div>
+		<div>-2</div>
+		<div>7</div>
+		<div>6</div>
+		<div>0</div>
+		
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		
+	</div>
+</div>
+
+<div class="grid-description">
+	<h2>Bewegung nach Links</h2>
+	<div class="grid">
+
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>-1</div>
+		<div>0</div>
+		<div>0</div>
+		
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		
+		<div>0</div>
+		<div>-2</div>
+		<div>8</div>
+		<div>7</div>
+		<div>6</div>
+		<div>0</div>
+		
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		<div>0</div>
+		
+	</div>
+</div>
+
+</section>
 
 ```java
 public class Snake {
