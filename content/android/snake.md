@@ -18,7 +18,7 @@ Falls das Schlange an den Rand oder an einen Teil ihres Körpers gespielt wurde,
 
 ## Projekt clonen
 
-Es steht eine Ausgangsbasis für das Projekt bereit. Dieses ist über Gitlab zu beziehen.
+Es steht eine Ausgangsbasis für das Projekt bereit. Dieses ist über Gitlab zu beziehen. Im Projekt finden sich alle Aufgaben als `TODOS` in Android Studio. Diese müssen Schritt für Schritt abgearbeitet werden um das Spiel zu realisieren.
 
 ![Snake Todos](images/02-snake-todos.png "Snake Todos")
 
