@@ -1,0 +1,43 @@
+site_name: Entwicklung und Betrieb mobiler Informationssysteme
+site_description: Entwicklung und Betrieb mobiler Informationssysteme
+site_author: Stefan Huber
+
+repo_url: https://github.com/stefanhuber/ebmi
+edit_uri: https://github.com/stefanhuber/ebmi
+
+nav:
+  - Home: 'index.md'
+  - 'Android':
+    - 'Einführung': 'android/einführung.md'
+    - 'Grafische Benutzeroberflächen': 'android/grafische-benutzeroberflächen.md'
+    - 'Apps ausführen': 'android/apps-ausführen.md'
+    - 'Sixteen Buttons': 'android/sixteen-buttons.md'
+    - 'Snake': 'android/snake.md'
+
+theme:
+  name: material
+  language: de
+  features:
+    - tabs
+  icon:
+    logo: fontawesome/solid/mobile-alt
+
+copyright: 'CC-BY-SA / Stefan Huber'
+
+docs_dir: content
+site_dir: docs
+
+extra:
+  search:
+    language: de
+
+markdown_extensions:
+  - markdown.extensions.admonition
+  - markdown.extensions.codehilite:
+      guess_lang: false
+
+plugins:
+  - search
+  - minify:
+      minify_html: true
+  
