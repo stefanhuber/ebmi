@@ -30,6 +30,8 @@ Es soll noch ein Ordner `docs` erstellt werden, welcher alle Projektdateien enh�
 !!! info "Hinweis"
     Für ein Deployment auf Github Pages sollten alle Dateien, welche zur App gehören im Ordner `docs` liegen. Dieser Ordner wird dann über einen Web-Server öffentlich bereitgestellt.
 
+Es soll ebenfalls 3 Bilder ([Icon 1](https://raw.githubusercontent.com/stefanhuber/fx-calculator/master/docs/icon16.png), [Icon 2](https://raw.githubusercontent.com/stefanhuber/fx-calculator/master/docs/icon512.png), [Icon 3](https://raw.githubusercontent.com/stefanhuber/fx-calculator/master/docs/icon192.png)) heruntergeladen werden und im Ordner `docs` abgelegt werden.
+
 ## HTML/CSS
 
 ![FX-Calculator](images/screenshot-fx-calculator.png "FX-Calculator")
