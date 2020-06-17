@@ -13,6 +13,8 @@ nav:
     - 'Apps ausführen': 'android/apps-ausführen.md'
     - 'Sixteen Buttons': 'android/sixteen-buttons.md'
     - 'Snake': 'android/snake.md'
+  - 'PWA':
+    - 'Fx Calculator': 'pwa/fx-calculator.md'
 
 theme:
   name: material
