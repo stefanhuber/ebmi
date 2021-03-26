@@ -1,0 +1,999 @@
+
+<!doctype html>
+<html lang="de" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Entwicklung und Betrieb mobiler Informationssysteme">
+      
+      
+      
+        <meta name="author" content="Stefan Huber">
+      
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.0.3">
+    
+    
+      
+        <title>Draggable Grid - Entwicklung und Betrieb mobiler Informationssysteme</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.1655a90d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.7fa14f5b.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+      
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#draggable-grid" class="md-skip">
+          Zum Inhalt
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Entwicklung und Betrieb mobiler Informationssysteme" class="md-header__button md-logo" aria-label="Entwicklung und Betrieb mobiler Informationssysteme">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M272 0H48C21.5 0 0 21.5 0 48v416c0 26.5 21.5 48 48 48h224c26.5 0 48-21.5 48-48V48c0-26.5-21.5-48-48-48zM160 480c-17.7 0-32-14.3-32-32s14.3-32 32-32 32 14.3 32 32-14.3 32-32 32zm112-108c0 6.6-5.4 12-12 12H60c-6.6 0-12-5.4-12-12V60c0-6.6 5.4-12 12-12h200c6.6 0 12 5.4 12 12v312z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Entwicklung und Betrieb mobiler Informationssysteme
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Draggable Grid
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="md-header__options">
+      
+    </div>
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Suche" placeholder="Suche" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Suche wird initialisiert
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.com/stefanhuber/ebmi/" title="Quellcode" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Entwicklung und Betrieb mobiler Informationssysteme" class="md-nav__button md-logo" aria-label="Entwicklung und Betrieb mobiler Informationssysteme">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M272 0H48C21.5 0 0 21.5 0 48v416c0 26.5 21.5 48 48 48h224c26.5 0 48-21.5 48-48V48c0-26.5-21.5-48-48-48zM160 480c-17.7 0-32-14.3-32-32s14.3-32 32-32 32 14.3 32 32-14.3 32-32 32zm112-108c0 6.6-5.4 12-12 12H60c-6.6 0-12-5.4-12-12V60c0-6.6 5.4-12 12-12h200c6.6 0 12 5.4 12 12v312z"/></svg>
+
+    </a>
+    Entwicklung und Betrieb mobiler Informationssysteme
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/stefanhuber/ebmi/" title="Quellcode" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      <label class="md-nav__link" for="__nav_2">
+        Mobile Web
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Mobile Web" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Mobile Web
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Draggable Grid
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Draggable Grid
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Inhaltsverzeichnis">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Inhaltsverzeichnis
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#projekt-setup" class="md-nav__link">
+    Projekt Setup
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#htmlcss" class="md-nav__link">
+    HTML/CSS
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#draggable" class="md-nav__link">
+    Draggable
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#drag-events" class="md-nav__link">
+    Drag Events
+  </a>
+  
+    <nav class="md-nav" aria-label="Drag Events">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#drag-start-und-drag-end" class="md-nav__link">
+    Drag Start und Drag End
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#drag-enter-und-drag-leave" class="md-nav__link">
+    Drag Enter und Drag Leave
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#drag-over-und-drop" class="md-nav__link">
+    Drag Over und Drop
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#aufgabe-1a" class="md-nav__link">
+    Aufgabe 1a:
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#aufgabe-1b" class="md-nav__link">
+    Aufgabe 1b:
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ausfuhrung-am-smartphone" class="md-nav__link">
+    Ausführung am Smartphone
+  </a>
+  
+    <nav class="md-nav" aria-label="Ausführung am Smartphone">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#touch-events" class="md-nav__link">
+    Touch Events
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#html-element-bewegen-touch-basiert" class="md-nav__link">
+    HTML-Element bewegen (Touch-basiert)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#html-element-tauschen-touch-basiert" class="md-nav__link">
+    HTML-Element tauschen (Touch-basiert)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#aufgabe-2a" class="md-nav__link">
+    Aufgabe 2a:
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#aufgabe-2b" class="md-nav__link">
+    Aufgabe 2b:
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#aufgabe-2c" class="md-nav__link">
+    Aufgabe 2c:
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fx-calculator/" class="md-nav__link">
+        Fx Calculator
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Inhaltsverzeichnis">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Inhaltsverzeichnis
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#projekt-setup" class="md-nav__link">
+    Projekt Setup
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#htmlcss" class="md-nav__link">
+    HTML/CSS
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#draggable" class="md-nav__link">
+    Draggable
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#drag-events" class="md-nav__link">
+    Drag Events
+  </a>
+  
+    <nav class="md-nav" aria-label="Drag Events">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#drag-start-und-drag-end" class="md-nav__link">
+    Drag Start und Drag End
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#drag-enter-und-drag-leave" class="md-nav__link">
+    Drag Enter und Drag Leave
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#drag-over-und-drop" class="md-nav__link">
+    Drag Over und Drop
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#aufgabe-1a" class="md-nav__link">
+    Aufgabe 1a:
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#aufgabe-1b" class="md-nav__link">
+    Aufgabe 1b:
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ausfuhrung-am-smartphone" class="md-nav__link">
+    Ausführung am Smartphone
+  </a>
+  
+    <nav class="md-nav" aria-label="Ausführung am Smartphone">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#touch-events" class="md-nav__link">
+    Touch Events
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#html-element-bewegen-touch-basiert" class="md-nav__link">
+    HTML-Element bewegen (Touch-basiert)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#html-element-tauschen-touch-basiert" class="md-nav__link">
+    HTML-Element tauschen (Touch-basiert)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#aufgabe-2a" class="md-nav__link">
+    Aufgabe 2a:
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#aufgabe-2b" class="md-nav__link">
+    Aufgabe 2b:
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#aufgabe-2c" class="md-nav__link">
+    Aufgabe 2c:
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/stefanhuber/ebmi/mobile-web/draggable-grid.md" title="Seite editieren" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                <h1 id="draggable-grid">Draggable Grid</h1>
+<p>In diesem Projekt soll ein <code>Responsive Grid</code> erstellt werden, welcher sich an die gegebenen Bildschirmgrößen anpasst. Die Anordnung der Elemente des Grid sollen über Drag und Drop verändert werden können. Das Projekt soll sowohl für Desktops als auch für Smartphones nutzbar sein.</p>
+<video controls style="max-width: 720px">
+    <source src="../videos/draggable-grid.m4v" type="video/mp4">
+</video>
+
+<h2 id="projekt-setup">Projekt Setup</h2>
+<p>Erstellen Sie einen leeren Projektordner auf Ihrem Rechner die Bennenung ist grundsätzlich egal, jedoch <code>draggable-grid</code> würde sich anbieten.</p>
+<p>Innerhalb des Ordners erstellen Sie eine Datei <code>package.json</code>. Als Inhalt der Datei fügen Sie 2 geschweifte Klammern ein:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{}</span>
+</code></pre></div>
+<p>Installieren Sie einen Web-Server zur lokalen Entwicklung mit <code>npm i http-server --save-dev</code>. Nach der Installation können Sie ein <code>script</code> in der Datei <code>package.json</code> hinzufügen um den Web-Server zu starten. Das finale <code>package.json</code> sollte folgenden Inhalt aufweisen:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+  <span class="nt">&quot;scripts&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&quot;start&quot;</span><span class="p">:</span> <span class="s2">&quot;http-server docs -p 8080&quot;</span>
+  <span class="p">},</span>
+  <span class="nt">&quot;devDependencies&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&quot;http-server&quot;</span><span class="p">:</span> <span class="s2">&quot;^0.12.3&quot;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Es soll noch ein Ordner <code>docs</code> erstellt werden, welcher alle Projektdateien enhält. Durch die Ausführung von <code>npm start</code> kann nun die lokale Entwicklung begonnen werden.</p>
+<div class="admonition info">
+<p class="admonition-title">Hinweis</p>
+<p>Für ein Deployment auf Github Pages sollten alle Dateien, welche zur App gehören im Ordner <code>docs</code> liegen. Dieser Ordner wird dann über einen Web-Server öffentlich bereitgestellt.</p>
+</div>
+<h2 id="htmlcss">HTML/CSS</h2>
+<p>Die Benutzerschnittstelle ist sehr einfach gehalten. Im folgenden findet sich das HTML-Dokument und das zugehörige CSS-Stylesheet um das Responsive Grid zu erstellen.</p>
+<div class="highlight"><pre><span></span><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;en&quot;</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&quot;UTF-8&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">http-equiv</span><span class="o">=</span><span class="s">&quot;X-UA-Compatible&quot;</span> <span class="na">content</span><span class="o">=</span><span class="s">&quot;IE=edge&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;viewport&quot;</span> <span class="na">content</span><span class="o">=</span><span class="s">&quot;width=device-width, initial-scale=1.0&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Draggable Grid<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;style.css&quot;</span><span class="p">&gt;</span>    
+<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Draggable Grid<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">ul</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">li</span> <span class="na">data-index</span><span class="o">=</span><span class="s">&quot;1&quot;</span><span class="p">&gt;</span>One<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">li</span> <span class="na">data-index</span><span class="o">=</span><span class="s">&quot;2&quot;</span><span class="p">&gt;</span>Two<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">li</span> <span class="na">data-index</span><span class="o">=</span><span class="s">&quot;3&quot;</span><span class="p">&gt;</span>Three<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">li</span> <span class="na">data-index</span><span class="o">=</span><span class="s">&quot;4&quot;</span><span class="p">&gt;</span>Four<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">li</span> <span class="na">data-index</span><span class="o">=</span><span class="s">&quot;5&quot;</span><span class="p">&gt;</span>Five<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">li</span> <span class="na">data-index</span><span class="o">=</span><span class="s">&quot;6&quot;</span><span class="p">&gt;</span>Six<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="nt">body</span> <span class="p">{</span>
+    <span class="k">font-family</span><span class="p">:</span> <span class="kc">sans-serif</span><span class="p">;</span>
+    <span class="k">margin</span><span class="p">:</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nt">h1</span> <span class="p">{</span>
+    <span class="k">font-size</span><span class="p">:</span> <span class="mi">18</span><span class="kt">px</span><span class="p">;</span>
+    <span class="k">text-align</span><span class="p">:</span> <span class="kc">center</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nt">ul</span> <span class="p">{</span>
+    <span class="k">padding</span><span class="p">:</span><span class="mi">20</span><span class="kt">px</span><span class="p">;</span>
+    <span class="k">display</span><span class="p">:</span> <span class="k">grid</span><span class="p">;</span>
+    <span class="k">grid-template-columns</span><span class="p">:</span> <span class="nf">repeat</span><span class="p">(</span><span class="kc">auto</span><span class="nv">-fit</span><span class="p">,</span> <span class="nf">minmax</span><span class="p">(</span><span class="mi">280</span><span class="kt">px</span><span class="p">,</span> <span class="mi">1</span><span class="n">fr</span><span class="p">));</span>    
+    <span class="k">column-gap</span><span class="p">:</span> <span class="mi">15</span><span class="kt">px</span><span class="p">;</span>
+    <span class="n">row-gap</span><span class="p">:</span><span class="mi">15</span><span class="kt">px</span><span class="p">;</span>
+    <span class="k">justify-content</span><span class="p">:</span> <span class="kc">center</span><span class="p">;</span>    
+<span class="p">}</span>
+
+<span class="p">@</span><span class="k">media</span> <span class="o">(</span><span class="nt">min-width</span><span class="o">:</span> <span class="nt">992px</span><span class="o">)</span> <span class="p">{</span>
+    <span class="nt">ul</span> <span class="p">{</span>
+        <span class="k">grid-template-columns</span><span class="p">:</span> <span class="nf">repeat</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="nf">minmax</span><span class="p">(</span><span class="mi">200</span><span class="kt">px</span><span class="p">,</span> <span class="mi">400</span><span class="kt">px</span><span class="p">));</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nt">li</span> <span class="p">{</span>
+    <span class="k">list-style</span><span class="p">:</span> <span class="kc">none</span><span class="p">;</span>
+    <span class="k">padding</span><span class="p">:</span> <span class="mi">10</span><span class="kt">px</span><span class="p">;</span>
+    <span class="k">border-radius</span><span class="p">:</span> <span class="mi">5</span><span class="kt">px</span><span class="p">;</span>
+    <span class="k">border</span><span class="p">:</span> <span class="mi">1</span><span class="kt">px</span> <span class="kc">solid</span> <span class="n">DarkTurquoise</span><span class="p">;</span>
+    <span class="k">background</span><span class="p">:</span> <span class="n">LightCyan</span><span class="p">;</span>
+    <span class="k">cursor</span><span class="p">:</span> <span class="n">grab</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Diese beiden Quellcodeabschnitte sind jeweils in die Datei <code>docs/index.html</code> bzw. <code>docs/style.css</code> zu kopieren.</p>
+<h2 id="draggable">Draggable</h2>
+<p>Um HTML-Elemente als <code>draggable</code> zu definieren, reicht es grundsätzlich aus, dass Attribut <code>draggable</code> und den Wert <code>true</code> zu setzen. Dies soll für die <code>li</code> Elemente durchgeführt werden:</p>
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">li</span> <span class="na">draggable</span><span class="o">=</span><span class="s">&quot;true&quot;</span> <span class="na">data-index</span><span class="o">=</span><span class="s">&quot;1&quot;</span><span class="p">&gt;</span>One<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">li</span> <span class="na">draggable</span><span class="o">=</span><span class="s">&quot;true&quot;</span> <span class="na">data-index</span><span class="o">=</span><span class="s">&quot;2&quot;</span><span class="p">&gt;</span>Two<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">li</span> <span class="na">draggable</span><span class="o">=</span><span class="s">&quot;true&quot;</span> <span class="na">data-index</span><span class="o">=</span><span class="s">&quot;3&quot;</span><span class="p">&gt;</span>Three<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+<span class="c">&lt;!-- ... --&gt;</span>
+</code></pre></div>
+<h2 id="drag-events">Drag Events</h2>
+<p>HTML-Elemente die als <code>draggable</code> definiert sind, erzeugen wichtige Events, welche über JavaScript abfragbar sind. In der folgenden Tabelle sind die wichtigsten Events aufgeführt. Als <code>Target</code> wird das HTML-Element bezeichnet, welches sich im JavaScript Event in der Eigenschaft <code>target</code> befindet.</p>
+<table>
+<thead>
+<tr>
+<th>Event</th>
+<th>Target</th>
+<th>Beschreibung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>drag</td>
+<td>Gezogenes HTML-Element</td>
+<td>Dieses Event wird alle paar Millisekunden getriggert, wenn das HTML-Element von der Benutzerin gezogen wird. Wichtige Eigenschaften wie die x/y Koordinaten des Mauszeigers befinden sich in diesem Event</td>
+</tr>
+<tr>
+<td>dragstart</td>
+<td>Gezogenes HTML-Element</td>
+<td>Die Benutzerin beginnt die Drag and Drop Operation</td>
+</tr>
+<tr>
+<td>dragend</td>
+<td>Gezogenes HTML-Element</td>
+<td>Die Benutzerin beendet die Drag and Drop Operation (zum Beispiel loslassen des Mouse-Button am Desktop)</td>
+</tr>
+<tr>
+<td>dragenter</td>
+<td><code>Drop-Target</code> HTML-Element</td>
+<td>Die Benutzerin zieht ein <code>draggable</code> HTML-Element über ein <code>Drop-Target</code></td>
+</tr>
+<tr>
+<td>dragleave</td>
+<td><code>Drop-Target</code> HTML-Element</td>
+<td>Die Benutzerin zieht ein <code>draggable</code> HTML-Element aus dem Bereich eines <code>Drop-Target</code></td>
+</tr>
+<tr>
+<td>dragover</td>
+<td><code>Drop-Target</code> HTML-Element</td>
+<td>Falls die Benutzerin ein <code>draggable</code> HTML-Element über ein <code>Drop-Target</code> zieht, wird alle paar Millisekunden das <code>dragover</code> Event mit genauen x/y Koordinaten der Mauszeiger erzeugt</td>
+</tr>
+<tr>
+<td>drop</td>
+<td><code>Drop-Target</code> HTML-Element</td>
+<td>Dieses Event wird erzeugt, wenn die Drag and Drop Operation auf einem <code>Drop-Target</code> beendet wird</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition info">
+<p class="admonition-title">Hinweis</p>
+<p>Ein HTML-Element wird grundsätzlich zum <code>Drop-Target</code>, wenn es das Attribut <code>draggable</code> besitzt.</p>
+</div>
+<h3 id="drag-start-und-drag-end">Drag Start und Drag End</h3>
+<p>Zur Demonstration des <code>dragstart</code> bzw. <code>dragend</code> Events soll eine CSS-Klasse auf dem HTML-Element gesetzt werden, welches sich in einer Drag and Drop Operation befindet.</p>
+<p>Dazu soll im ersten Schritt die CSS-Klasse <code>dragged</code> im CSS-Stylestheet hinzugefügt werden:</p>
+<div class="highlight"><pre><span></span><code><span class="c">/* ... */</span>
+<span class="p">.</span><span class="nc">dragged</span> <span class="p">{</span>
+    <span class="k">opacity</span><span class="p">:</span> <span class="mi">30</span><span class="kt">%</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Zusätzlich soll eine <code>index.js</code> Datei erzeugt werden, welche das notwendige JavaScript enthält. Die JavaScript Datei soll über ein <code>script</code> Tag im HTML-Head eingebunden werden:</p>
+<div class="highlight"><pre><span></span><code><span class="c">&lt;!-- ... --&gt;</span>
+<span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="c">&lt;!-- ... --&gt;</span>
+    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">defer</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;index.js&quot;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+<span class="c">&lt;!-- ... --&gt;</span>
+</code></pre></div>
+<p>Als Inhalt der JavaScript Datei soll folgendes hinzugefügt werden:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span> <span class="nx">draggableItemsContainer</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">&#39;ul&#39;</span><span class="p">);</span>
+
+<span class="nx">draggableItemsContainer</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;dragstart&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">&#39;dragged&#39;</span><span class="p">);</span>
+<span class="p">});</span>
+<span class="nx">draggableItemsContainer</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;dragend&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="s1">&#39;dragged&#39;</span><span class="p">);</span>
+<span class="p">});</span>   
+</code></pre></div>
+<p>Im Skript wird das Elternelement der <code>draggable</code> HTML-Elemente selektiert. Es wird der EventListener <code>dragstart</code> oder <code>dragend</code> gesetzt, welcher die CSS-Klasse <code>dragged</code> am Event Target setzt oder entfernt.</p>
+<h3 id="drag-enter-und-drag-leave">Drag Enter und Drag Leave</h3>
+<p>Am <code>Drop-Target</code> soll ebenfalls eine CSS-Styleänderung durchgeführt werden, wenn eine Drag and Drop Operation über dem HTML-Element durchgeführt wird. Es soll die CSS-Klasse <code>dragover</code> erstellt werden. Diese CSS-Klasse soll über die Events <code>dragenter</code> bzw. <code>dragleave</code> am <code>Drop-Target</code> "getoggled" werden.</p>
+<div class="highlight"><pre><span></span><code><span class="c">/* ... */</span> 
+<span class="p">.</span><span class="nc">dragover</span> <span class="p">{</span>
+    <span class="k">border</span><span class="p">:</span> <span class="mi">1</span><span class="kt">px</span> <span class="kc">dotted</span> <span class="n">OrangeRed</span><span class="p">;</span>
+    <span class="k">background</span><span class="p">:</span> <span class="n">Coral</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Die Änderung der CSS-Klasse soll dabei nur durchgeführt werden, wenn das Event Target ein <code>index</code> Attribut im <code>Dataset</code> definiert hat. Dies wurde für alle <code>draggable</code> HTML-Elemente bereits definiert. Ansonsten würden alle möglichen HTML-Elemente, über welche das HTML-Element gezogen wird mit der CSS-Klasse ausgestattet.</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// ...</span>
+<span class="nx">draggableItemsContainer</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;dragenter&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">dataset</span><span class="p">.</span><span class="nx">index</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">&#39;dragover&#39;</span><span class="p">);</span>
+    <span class="p">}</span>    
+<span class="p">});</span>
+<span class="nx">draggableItemsContainer</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;dragleave&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">dataset</span><span class="p">.</span><span class="nx">index</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="s1">&#39;dragover&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">});</span>  
+</code></pre></div>
+<h3 id="drag-over-und-drop">Drag Over und Drop</h3>
+<p>Damit das entsprechende Drop Event ausgeführt wird und die HTML-Elemente entsprechend getauscht werden, müssen EventListener für <code>dragover</code> und <code>drop</code> hinzugefügt werde. Damit das <code>drop</code> Event korrekt ausgeführt wird, muss für das <code>dragover</code> Event die Function <code>preventDefault</code> ausgeführt werden. Nur in diesem Fall erlaub der Web-Browser <code>drop</code> Events.</p>
+<p>Um im <code>drop</code> Event, welches auf dem <code>Drop-Target</code> ausgeführt wird, das gezogene HTML-Element anzufragen, soll im <code>dragstart</code> der <code>data-index</code> vom gezogenen HTML-Element innerhalb des <a href="https://developer.mozilla.org/en-US/docs/Web/API/DataTransfer">DataTransfer</a> Objektes mitgeben werden.</p>
+<div class="admonition info">
+<p class="admonition-title">Hinweis</p>
+<p>Das <code>DataTransfer</code> Objekt könnte zB auch eine Datei enthalten, welche am Desktop vom Datei-Explorer in den Web-Browser gezogen wird (per Drag and Drop).</p>
+</div>
+<p>Im <code>datastart</code> Event soll am entsprechenden <code>DataTransfer</code> Objekt über die Methode <code>setData</code> der <code>data-index</code> des gezogenen HTML-Elements hinzugefügt werden. Die <code>setData</code> Methode verlangt als ersten Parameter den Mime-Type des 2. Parameters. In diesem Fall handelt es sich um Plaintext. Falls es sich um ein Bild handeln würde, könnte zB <code>image/jpg</code> als Mime-Type angegeben werden.</p>
+<p>Im <code>drop</code> Event kann dann der Wert, welcher im <code>DataTransfer</code> Objekt gesetzt wurde wieder abgefrag werden. Somit können beide Indizes (vom gezogenen HTML-Element und vom <code>Drop-Target</code>) abgefragt werden. Mit den beiden Indizes Werten kann im folgenden die Änderung im DOM vorgenommen werden, sodass eben die beiden HTML-Elemente ausgetauscht werden.</p>
+<div class="highlight"><pre><span></span><code><span class="nx">draggableItemsContainer</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;dragstart&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nx">e</span><span class="p">.</span><span class="nx">dataTransfer</span><span class="p">.</span><span class="nx">setData</span><span class="p">(</span><span class="s1">&#39;text/plain&#39;</span><span class="p">,</span> <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">dataset</span><span class="p">.</span><span class="nx">index</span><span class="p">);</span> <span class="c1">// data-index</span>
+    <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">&#39;dragged&#39;</span><span class="p">);</span>
+<span class="p">});</span>
+<span class="c1">// ...</span>
+<span class="nx">draggableItemsContainer</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;dragover&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nx">e</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
+<span class="p">});</span>
+<span class="nx">draggableItemsContainer</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;drop&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nx">e</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
+    <span class="kd">const</span> <span class="nx">index1</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">dataTransfer</span><span class="p">.</span><span class="nx">getData</span><span class="p">(</span><span class="s1">&#39;text/plain&#39;</span><span class="p">);</span>
+    <span class="kd">const</span> <span class="nx">index2</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">dataset</span><span class="p">.</span><span class="nx">index</span><span class="p">;</span>
+    <span class="c1">// TODO: HTML-Elemente tauschen</span>
+<span class="p">});</span>
+</code></pre></div>
+<h2 id="aufgabe-1a">Aufgabe 1a:</h2>
+<p>Das HTML-Element, welches gerade gezogen wird, soll beim <code>dragenter</code> Event die CSS-Klasse <code>dragover</code> nicht gesetzt bekommen.</p>
+<h2 id="aufgabe-1b">Aufgabe 1b:</h2>
+<p>Im <code>drop</code> Event wurde ein <code>TODO</code> hinterlegt, welches die beiden über die entsprechenden <code>data-index</code> Attribute identifizierbaren HTML-Elemente tauschen soll. Erstellen Sie dazu eine globale Funktion <code>swapItems</code>, welche die beiden Indizes <code>index1</code> und <code>index2</code> übergeben bekommt. Die Funktion soll dann die beiden HTML-Elemente im DOM austauschen. Dabei sollte nicht nur der Textinhalt getauscht werden, sondern tatsächlich die HTML-Elemente.</p>
+<blockquote>
+<p><em><strong>Hinweis:</strong> Für die DOM-API gibt es eine Vielzahl hilfreicher Funktionen, welche generell für Änderungen im DOM verwendet werden können. Im konkreten Fall, gibt es Funktionen wie zB <code>insertAdjacentElement</code>, <code>appendChild</code> oder <code>removeChild</code>, welche hier nützlich sein können. Ebenfalls gibt es zum jeweiligen DOM-Knoten (aka HTML-Element) wichtige und nützliche Attribute, im konkreten Fall zum Beispiel <code>previousElementSibling</code> oder <code>nextElementSibling</code>.</em> </p>
+</blockquote>
+<h2 id="ausfuhrung-am-smartphone">Ausführung am Smartphone</h2>
+<p>Wenn die Web-Applikation auf Github gestellt wird und dort über Github Pages deployed wird, wird ersichtlich, dass das Drag and Drop nicht am Smartphone funktioniert. Leider funktioniert die aktuelle Implementierung nur für Desktop Browser, dass hätte man vielleicht am Beginn des Tutorials bereits erwähnen sollen <img alt="🙄" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/1f644.svg" title=":face_with_rolling_eyes:" />.</p>
+<h3 id="touch-events">Touch Events</h3>
+<p>Der Web-Browser ist multitouchfähig. Das bedeutet, dass jeder Finger am Display einzeln abgebildet werden kann. Jeder Finger ist als <code>Touch</code> Objekt repräsentiert. Am <code>Touch</code> Objekt wird über die Eigenschaften <code>clientX</code> bzw. <code>clientY</code> die Koordinaten des Fingers am Display angegeben.</p>
+<p>Ensprechend des Verhaltens der Finger am Display sind unterschiedliche Events definiert:</p>
+<table>
+<thead>
+<tr>
+<th>Event</th>
+<th>Beschreibung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>touchstart</td>
+<td>Ein Finger ist auf das Display gelegt worden, am entsprechenden HTML-Element wird das <code>touchstart</code> Event ausgelöst</td>
+</tr>
+<tr>
+<td>touchend</td>
+<td>Ein Finger ist vom Display entfernt worden, am entsprechenden HTML-Element wird das <code>touchend</code> Event ausgelöst</td>
+</tr>
+<tr>
+<td>touchmove</td>
+<td>Ein Finger am Display wird bewegt</td>
+</tr>
+<tr>
+<td>touchcancel</td>
+<td>Der Touch-Vorgang wurde unsachgemäß beendet, zum Beispiel wurde der Finger über das Display hinausgezogen</td>
+</tr>
+</tbody>
+</table>
+<h3 id="html-element-bewegen-touch-basiert">HTML-Element bewegen (Touch-basiert)</h3>
+<p>Ähnlich zum klassischen Drag and Drop werden für das Touch Handling die EventListener ebenfalls am Elternelement <code>ul</code> gesetzt. </p>
+<p>Im ersten Schritt ist es wichtig zu verstehen, wie ein HTML-Element bewegt werden kann. Eine effiziente Form kann über die CSS-Eigenschaft <code>transform</code> mit dem Wert <code>translate(x,y)</code> durchgeführt werden. Dies kann eben unter anderem über JavaScript durchgeführt werden. Folgender Javascript Quellcode würde ein bestehendes HTML-Element 15px nach rechts und 15px nach oben verschieben. Wählen Sie dazu ein beliebiges HTML-Element einer Website über die Web-Entwickler Werkzeuge aus und fügen Sie in der Konsole folgendes JavaScript ein:</p>
+<div class="highlight"><pre><span></span><code><span class="nx">$0</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">transform</span> <span class="o">=</span> <span class="s2">&quot;translate(15px, -15px)&quot;</span><span class="p">;</span>
+</code></pre></div>
+<p>Wichtig zu verstehen ist, dass der Platz an dem das HTML-Element vor dem Transformationsschritt gezeichnet wurde frei bleibt. Die umliegenden HTML-Element füllen den leeren Platz nicht auf. Das transformierte HTML-Element überdeckt die umliegenden HTML-Elemente. Aus diesem Grund ist generell nur die <code>Composite</code> Phase des Rendering Vorgangs im Web-Browser notwendig.</p>
+<p>Die Bewegung über JavaScript würde so enstehen, dass bei jedem <code>touchmove</code> Event die x/y Koordinaten für die Transformation am zu bewegenden HTML-Element (<code>translate(x, y)</code>) angepasst wird. Die <code>x</code> bzw. <code>y</code> Werte für die <code>translate</code> Funktion sollen dabei immer als Differenz zum initialen Wert der x/y Koordinaten des Touch Events gesetzt werden. Dies ist soll hoffentlich über die unten angeführte Grafik verständlich gemacht werden:</p>
+<p><img alt="Draggable" src="../images/draggable.svg" title="Draggable" /></p>
+<p>Der gesamte Drag and Drop Quellcode aus den vorangegangenen Abschnitten soll innerhalb einer Funktion <code>initDragAndDrop</code> hinterlegt werden. Die von Ihnen entwickelte globale Funktion <code>swapItems</code> soll nicht innerhalb der <code>initDragAndDrop</code> gesetzt werden, diese wird auch im Touch Handling wiederverwendet. Vorerst soll nur die <code>initTouch</code> Funktion ausgeführt werden.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">function</span> <span class="nx">initDragAndDrop</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">draggableItemsContainer</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">&#39;ul&#39;</span><span class="p">);</span>
+
+    <span class="c1">// ...</span>
+    <span class="c1">// Drag and Drop Quellcode aus dem vorangegangenen Abschnitten</span>
+    <span class="c1">// hier einfügen</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">initTouch</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">draggableItemsContainer</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">&#39;ul&#39;</span><span class="p">);</span>
+    <span class="kd">let</span> <span class="nx">initialX</span> <span class="o">=</span> <span class="mf">0</span><span class="p">;</span>
+    <span class="kd">let</span> <span class="nx">initialY</span> <span class="o">=</span> <span class="mf">0</span><span class="p">;</span>
+
+    <span class="nx">draggableItemsContainer</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;touchstart&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>        
+        <span class="nx">initialX</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">touches</span><span class="p">[</span><span class="mf">0</span><span class="p">].</span><span class="nx">clientX</span><span class="p">;</span>
+        <span class="nx">initialY</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">touches</span><span class="p">[</span><span class="mf">0</span><span class="p">].</span><span class="nx">clientY</span><span class="p">;</span>
+    <span class="p">});</span>
+    <span class="nx">draggableItemsContainer</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;touchmove&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="nx">x</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">touches</span><span class="p">[</span><span class="mf">0</span><span class="p">].</span><span class="nx">clientX</span> <span class="o">-</span> <span class="nx">initialX</span><span class="p">;</span>
+        <span class="kd">const</span> <span class="nx">y</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">touches</span><span class="p">[</span><span class="mf">0</span><span class="p">].</span><span class="nx">clientY</span> <span class="o">-</span> <span class="nx">initialY</span><span class="p">;</span> 
+        <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">transform</span> <span class="o">=</span> <span class="s2">&quot;translate(&quot;</span> <span class="o">+</span> <span class="nx">x</span> <span class="o">+</span> <span class="s2">&quot;px, &quot;</span> <span class="o">+</span> <span class="nx">y</span> <span class="o">+</span> <span class="s2">&quot;px)&quot;</span><span class="p">;</span> 
+    <span class="p">});</span>
+    <span class="nx">draggableItemsContainer</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;touchend&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+        <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">transform</span> <span class="o">=</span> <span class="s2">&quot;translate(0px, 0px)&quot;</span><span class="p">;</span>
+    <span class="p">});</span>
+<span class="p">}</span>
+
+<span class="nx">initTouch</span><span class="p">();</span>
+</code></pre></div>
+<p>Mit dem <code>touchstart</code> Event sollen die initialen x/y Koordinaten des Fingers gespeichert werden. Zu jedem <code>touchmove</code> Event soll die Transformation des HTML-Elements über die Differenz der initialen Position des Fingers zur aktuellen Position des Fingers berechnet werden. Im <code>touchend</code> Event soll die Transformation wieder auf ihren Ursprungszustand zurückgesetzt werden.</p>
+<h3 id="html-element-tauschen-touch-basiert">HTML-Element tauschen (Touch-basiert)</h3>
+<p>Um das Tauschen der HTML-Elemente durchzuführen, muss im <code>touchend</code> Event das HTML-Element detektiert werden, welches unterhalb des Fingers liegt (aka <code>Drop-Target</code> im Fall von Drag and Drop). Dazu gibt es die hilfreiche DOM-API Funktion <code>document.elementsFromPoint(x, y)</code>. Mit dieser Funktion kann über die Angabe einer beliebigen x/y Koordinate das entsprechende HTML-Element, welches sich an dieser Position befindet abgefragt werden.</p>
+<p>Dazu wird eine Variable <code>lastX</code> bzw. <code>lastY</code> eingeführt. Diese wird innerhalb jedes <code>touchmove</code> Events gesetzt. Damit können wir im <code>touchend</code> die letzte Position des Fingers (als er noch am Display war) bestimmen. Mit der Funktion <code>elementsFromPoint</code> und den letzten bekannten x/y Koordinaten kann letzlich das HTML-Element, welches in als <code>Drop-Target</code> fungiert bestimmt werden. Der gesamte Quellcode der <code>initTouch</code> Funktion findet sich nun unten:</p>
+<div class="highlight"><pre><span></span><code><span class="kd">function</span> <span class="nx">initTouch</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">draggableItemsContainer</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">&#39;ul&#39;</span><span class="p">);</span>
+    <span class="kd">let</span> <span class="nx">initialX</span> <span class="o">=</span> <span class="mf">0</span><span class="p">;</span>
+    <span class="kd">let</span> <span class="nx">initialY</span> <span class="o">=</span> <span class="mf">0</span><span class="p">;</span>
+    <span class="kd">let</span> <span class="nx">lastX</span> <span class="o">=</span> <span class="mf">0</span><span class="p">;</span>
+    <span class="kd">let</span> <span class="nx">lastY</span> <span class="o">=</span> <span class="mf">0</span><span class="p">;</span>
+
+    <span class="nx">draggableItemsContainer</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;touchstart&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+        <span class="nx">initialX</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">touches</span><span class="p">[</span><span class="mf">0</span><span class="p">].</span><span class="nx">clientX</span><span class="p">;</span>
+        <span class="nx">initialY</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">touches</span><span class="p">[</span><span class="mf">0</span><span class="p">].</span><span class="nx">clientY</span><span class="p">;</span>
+    <span class="p">});</span>
+    <span class="nx">draggableItemsContainer</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;touchmove&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="nx">x</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">touches</span><span class="p">[</span><span class="mf">0</span><span class="p">].</span><span class="nx">clientX</span> <span class="o">-</span> <span class="nx">initialX</span><span class="p">;</span>
+        <span class="kd">const</span> <span class="nx">y</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">touches</span><span class="p">[</span><span class="mf">0</span><span class="p">].</span><span class="nx">clientY</span> <span class="o">-</span> <span class="nx">initialY</span><span class="p">;</span> 
+        <span class="nx">lastX</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">touches</span><span class="p">[</span><span class="mf">0</span><span class="p">].</span><span class="nx">clientX</span><span class="p">;</span>
+        <span class="nx">lastY</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">touches</span><span class="p">[</span><span class="mf">0</span><span class="p">].</span><span class="nx">clientY</span><span class="p">;</span>
+        <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">transform</span> <span class="o">=</span> <span class="s2">&quot;translate(&quot;</span> <span class="o">+</span> <span class="nx">x</span> <span class="o">+</span> <span class="s2">&quot;px, &quot;</span> <span class="o">+</span> <span class="nx">y</span> <span class="o">+</span> <span class="s2">&quot;px)&quot;</span><span class="p">;</span> 
+    <span class="p">});</span>
+    <span class="nx">draggableItemsContainer</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;touchend&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="nx">elementList</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">elementsFromPoint</span><span class="p">(</span><span class="nx">lastX</span><span class="p">,</span> <span class="nx">lastY</span><span class="p">)</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">elementList</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mf">1</span> <span class="o">&amp;&amp;</span> <span class="nx">elementList</span><span class="p">[</span><span class="mf">1</span><span class="p">].</span><span class="nx">hasAttribute</span><span class="p">(</span><span class="s1">&#39;draggable&#39;</span><span class="p">))</span> <span class="p">{</span>
+            <span class="c1">// die swapItems Funktion wurde bereits in Aufgabe 1b von Ihnen erstellt</span>
+            <span class="nx">swapItems</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">dataset</span><span class="p">.</span><span class="nx">index</span><span class="p">,</span> <span class="nx">elementList</span><span class="p">[</span><span class="mf">1</span><span class="p">].</span><span class="nx">dataset</span><span class="p">.</span><span class="nx">index</span><span class="p">);</span>
+        <span class="p">}</span>        
+        <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">transform</span> <span class="o">=</span> <span class="s2">&quot;translate(0px, 0px)&quot;</span><span class="p">;</span>
+    <span class="p">});</span>
+<span class="p">}</span>
+
+<span class="nx">initTouch</span><span class="p">();</span>
+</code></pre></div>
+<p>Um die Funktionalität des Touch-Handlings ähnlich zum Drag and Drop herzustellen, müssen noch einige Kleinigkeiten gelöst werden. Dazu sollen die Aufgaben 2a, 2b und 2c abgearbeitet werden. </p>
+<h2 id="aufgabe-2a">Aufgabe 2a:</h2>
+<p>Mit dem <code>touchstart</code> soll die CSS-Klasse <code>dragged</code> am gezogenen HTML-Element gesetzt werden. Mit dem <code>touchend</code> Event soll diese Klasse wieder entfernt werden. Dies soll einen ähnlichen Effekt zeigen wie im Drag and Drop Beispiel.</p>
+<h2 id="aufgabe-2b">Aufgabe 2b:</h2>
+<p>Die CSS-Klasse <code>dragover</code> soll ebenfalls bei den HTML-Elementen gesetzt werden, über welche das gezogenen HTML-Element fährt. Dabei muss im <code>touchmove</code> Event das HTML-Element bestimmt werden, über das gerade gezogen wird. Dazu kann wiederum die bekannte Funktion <code>elementsFromPoint</code> verwendet werden. Es gibt kein <code>dragenter</code> bzw. <code>dragleave</code> Event, welches im Touch-Handling verfügbar ist. Sie müssen sich eine entsprechende Logik überlegen, wie innerhalb des <code>touchmove</code> Events die CSS-Klasse <code>dragover</code> gesetzt bzw. entfernt wird, sodass der entsprechende Effekt gewährleistet ist.</p>
+<h2 id="aufgabe-2c">Aufgabe 2c:</h2>
+<p>Am Smartphone bzw. Tablet soll im JavaScript die Funktion <code>initTouch</code> ausgeführt werden, sodass das Drag and Drop funktioniert. Am Desktop bzw. Laptop soll die Funktion <code>initDragAndDrop</code> ausgeführt werden. Die entsprechenden Funktionen müssen also konditional geladen werden, jenachdem welche Funktionen der Web-Browser unterstützt (Touch-Handling oder Drag and Drop). Recherchieren Sie einen geeigneten Weg um dies zu bewerkstelligen. </p>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        <a href="../.." class="md-footer__link md-footer__link--prev" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Zurück
+              </span>
+              Home
+            </div>
+          </div>
+        </a>
+      
+      
+        <a href="../fx-calculator/" class="md-footer__link md-footer__link--next" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Weiter
+              </span>
+              Fx Calculator
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            CC-BY-SA / Stefan Huber
+          </div>
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["tabs"], "translations": {"clipboard.copy": "In Zwischenablage kopieren", "clipboard.copied": "In Zwischenablage kopiert", "search.config.lang": "de", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Suche", "search.result.placeholder": "Suchbegriff eingeben", "search.result.none": "Keine Suchergebnisse", "search.result.one": "1 Suchergebnis", "search.result.other": "# Suchergebnisse", "search.result.more.one": "1 weiteres Suchergebnis auf dieser Seite", "search.result.more.other": "# weitere Suchergebnisse auf dieser Seite", "search.result.term.missing": "Es fehlt"}, "search": "../../assets/javascripts/workers/search.fb4a9340.min.js", "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.ca5457b8.min.js"></script>
+      
+    
+  </body>
+</html>

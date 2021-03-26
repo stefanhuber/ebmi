@@ -1,5 +1,7 @@
 # Entwicklung und Betrieb mobiler Informationssysteme
 
- - [Android](android/einführung.md)
- - [PWA](pwa/fx-calculator.md)
+## Mobile Web Entwicklung
+
+ - [Draggable Grid](mobile-web/draggable-grid.md)
+ - [FX-Calculator](mobile-web/fx-calculator.md)
 

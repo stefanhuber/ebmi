@@ -1,4 +1,363 @@
-<!doctype html><html lang=de class=no-js> <head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="Entwicklung und Betrieb mobiler Informationssysteme"><meta name=author content="Stefan Huber"><link rel="shortcut icon" href=../../assets/images/favicon.png><meta name=generator content="mkdocs-1.1, mkdocs-material-5.3.0"><title>Snake - Entwicklung und Betrieb mobiler Informationssysteme</title><link rel=stylesheet href=../../assets/stylesheets/main.6e35a1a6.min.css><link href=https://fonts.gstatic.com rel=preconnect crossorigin><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback"><style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style></head> <body dir=ltr> <input class=md-toggle data-md-toggle=drawer type=checkbox id=__drawer autocomplete=off> <input class=md-toggle data-md-toggle=search type=checkbox id=__search autocomplete=off> <label class=md-overlay for=__drawer></label> <div data-md-component=skip> <a href=#snake class=md-skip> Zum Inhalt </a> </div> <div data-md-component=announce> </div> <header class=md-header data-md-component=header> <nav class="md-header-nav md-grid" aria-label=Header> <a href=../.. title="Entwicklung und Betrieb mobiler Informationssysteme" class="md-header-nav__button md-logo" aria-label="Entwicklung und Betrieb mobiler Informationssysteme"> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 320 512"><path d="M272 0H48C21.5 0 0 21.5 0 48v416c0 26.5 21.5 48 48 48h224c26.5 0 48-21.5 48-48V48c0-26.5-21.5-48-48-48zM160 480c-17.7 0-32-14.3-32-32s14.3-32 32-32 32 14.3 32 32-14.3 32-32 32zm112-108c0 6.6-5.4 12-12 12H60c-6.6 0-12-5.4-12-12V60c0-6.6 5.4-12 12-12h200c6.6 0 12 5.4 12 12v312z"/></svg> </a> <label class="md-header-nav__button md-icon" for=__drawer> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg> </label> <div class=md-header-nav__title data-md-component=header-title> <div class=md-header-nav__ellipsis> <span class="md-header-nav__topic md-ellipsis"> Entwicklung und Betrieb mobiler Informationssysteme </span> <span class="md-header-nav__topic md-ellipsis"> Snake </span> </div> </div> <label class="md-header-nav__button md-icon" for=__search> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg> </label> <div class=md-search data-md-component=search role=dialog> <label class=md-search__overlay for=__search></label> <div class=md-search__inner role=search> <form class=md-search__form name=search> <input type=text class=md-search__input name=query aria-label=Suche placeholder=Suche autocapitalize=off autocorrect=off autocomplete=off spellcheck=false data-md-component=search-query data-md-state=active> <label class="md-search__icon md-icon" for=__search> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg> </label> <button type=reset class="md-search__icon md-icon" aria-label=Clear data-md-component=search-reset tabindex=-1> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg> </button> </form> <div class=md-search__output> <div class=md-search__scrollwrap data-md-scrollfix> <div class=md-search-result data-md-component=search-result> <div class=md-search-result__meta> Suche wird initialisiert </div> <ol class=md-search-result__list></ol> </div> </div> </div> </div> </div> <div class=md-header-nav__source> <a href=https://github.com/stefanhuber/ebmi/ title=Quellcode class=md-source> <div class="md-source__icon md-icon"> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg> </div> <div class=md-source__repository> GitHub </div> </a> </div> </nav> </header> <div class=md-container data-md-component=container> <nav class="md-tabs md-tabs--active" aria-label=Tabs data-md-component=tabs> <div class="md-tabs__inner md-grid"> <ul class=md-tabs__list> <li class=md-tabs__item> <a href=../.. class=md-tabs__link> Home </a> </li> <li class=md-tabs__item> <a href=../einf%C3%BChrung/ class="md-tabs__link md-tabs__link--active"> Android </a> </li> <li class=md-tabs__item> <a href=../../pwa/fx-calculator/ class=md-tabs__link> PWA </a> </li> </ul> </div> </nav> <main class=md-main data-md-component=main> <div class="md-main__inner md-grid"> <div class="md-sidebar md-sidebar--primary" data-md-component=navigation> <div class=md-sidebar__scrollwrap> <div class=md-sidebar__inner> <nav class="md-nav md-nav--primary" aria-label=Navigation data-md-level=0> <label class=md-nav__title for=__drawer> <a href=../.. title="Entwicklung und Betrieb mobiler Informationssysteme" class="md-nav__button md-logo" aria-label="Entwicklung und Betrieb mobiler Informationssysteme"> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 320 512"><path d="M272 0H48C21.5 0 0 21.5 0 48v416c0 26.5 21.5 48 48 48h224c26.5 0 48-21.5 48-48V48c0-26.5-21.5-48-48-48zM160 480c-17.7 0-32-14.3-32-32s14.3-32 32-32 32 14.3 32 32-14.3 32-32 32zm112-108c0 6.6-5.4 12-12 12H60c-6.6 0-12-5.4-12-12V60c0-6.6 5.4-12 12-12h200c6.6 0 12 5.4 12 12v312z"/></svg> </a> Entwicklung und Betrieb mobiler Informationssysteme </label> <div class=md-nav__source> <a href=https://github.com/stefanhuber/ebmi/ title=Quellcode class=md-source> <div class="md-source__icon md-icon"> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg> </div> <div class=md-source__repository> GitHub </div> </a> </div> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../.. title=Home class=md-nav__link> Home </a> </li> <li class="md-nav__item md-nav__item--active md-nav__item--nested"> <input class="md-nav__toggle md-toggle" data-md-toggle=nav-2 type=checkbox id=nav-2 checked> <label class=md-nav__link for=nav-2> Android <span class="md-nav__icon md-icon"> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg> </span> </label> <nav class=md-nav aria-label=Android data-md-level=1> <label class=md-nav__title for=nav-2> <span class="md-nav__icon md-icon"> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg> </span> Android </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../einf%C3%BChrung/ title=Einführung class=md-nav__link> Einführung </a> </li> <li class=md-nav__item> <a href=../grafische-benutzeroberfl%C3%A4chen/ title="Grafische Benutzeroberflächen" class=md-nav__link> Grafische Benutzeroberflächen </a> </li> <li class=md-nav__item> <a href=../apps-ausf%C3%BChren/ title="Apps ausführen" class=md-nav__link> Apps ausführen </a> </li> <li class=md-nav__item> <a href=../sixteen-buttons/ title="Sixteen Buttons" class=md-nav__link> Sixteen Buttons </a> </li> <li class="md-nav__item md-nav__item--active"> <input class="md-nav__toggle md-toggle" data-md-toggle=toc type=checkbox id=__toc> <label class="md-nav__link md-nav__link--active" for=__toc> Snake <span class="md-nav__icon md-icon"> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M3 9h14V7H3v2m0 4h14v-2H3v2m0 4h14v-2H3v2m16 0h2v-2h-2v2m0-10v2h2V7h-2m0 6h2v-2h-2v2z"/></svg> </span> </label> <a href=./ title=Snake class="md-nav__link md-nav__link--active"> Snake </a> <nav class="md-nav md-nav--secondary" aria-label=Inhaltsverzeichnis> <label class=md-nav__title for=__toc> <span class="md-nav__icon md-icon"> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg> </span> Inhaltsverzeichnis </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=#projektubersicht class=md-nav__link> Projektübersicht </a> </li> <li class=md-nav__item> <a href=#projekt-clonen class=md-nav__link> Projekt clonen </a> </li> <li class=md-nav__item> <a href=#klasse-snake class=md-nav__link> Klasse Snake </a> </li> <li class=md-nav__item> <a href=#eigene-view-klasse class=md-nav__link> Eigene View Klasse </a> </li> <li class=md-nav__item> <a href=#gameactivity-layout class=md-nav__link> GameActivity Layout </a> </li> </ul> </nav> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle" data-md-toggle=nav-3 type=checkbox id=nav-3> <label class=md-nav__link for=nav-3> PWA <span class="md-nav__icon md-icon"> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg> </span> </label> <nav class=md-nav aria-label=PWA data-md-level=1> <label class=md-nav__title for=nav-3> <span class="md-nav__icon md-icon"> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg> </span> PWA </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../../pwa/fx-calculator/ title="Fx Calculator" class=md-nav__link> Fx Calculator </a> </li> </ul> </nav> </li> </ul> </nav> </div> </div> </div> <div class="md-sidebar md-sidebar--secondary" data-md-component=toc> <div class=md-sidebar__scrollwrap> <div class=md-sidebar__inner> <nav class="md-nav md-nav--secondary" aria-label=Inhaltsverzeichnis> <label class=md-nav__title for=__toc> <span class="md-nav__icon md-icon"> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg> </span> Inhaltsverzeichnis </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=#projektubersicht class=md-nav__link> Projektübersicht </a> </li> <li class=md-nav__item> <a href=#projekt-clonen class=md-nav__link> Projekt clonen </a> </li> <li class=md-nav__item> <a href=#klasse-snake class=md-nav__link> Klasse Snake </a> </li> <li class=md-nav__item> <a href=#eigene-view-klasse class=md-nav__link> Eigene View Klasse </a> </li> <li class=md-nav__item> <a href=#gameactivity-layout class=md-nav__link> GameActivity Layout </a> </li> </ul> </nav> </div> </div> </div> <div class=md-content> <article class="md-content__inner md-typeset"> <a href=https://github.com/stefanhuber/ebmi/android/snake.md title="Seite editieren" class="md-content__button md-icon"> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg> </a> <h1 id=snake>Snake</h1> <h2 id=projektubersicht>Projektübersicht</h2> <p>Für das Projekt werden 3 <code>Activities</code> benötigt. Jeder Screen der App wird über eine <code>Activity</code> realisiert. Für jede <code>Activity</code> muss auch ein eigenes Layout als XML erstellt werden.</p> <div style=display:flex> <img style="margin:3px; max-width:33%;" src=../images/02-snake-01.png title="Snake 01" alt="Snake 01"> <img style="margin:3px; max-width:33%;" src=../images/02-snake-02.png title="Snake 02" alt="Snake 02"> <img style="margin:3px; max-width:33%;" src=../images/02-snake-03.png title="Snake 03" alt="Snake 03"> </div> <p>Am Startscreen (<code>MainActivity</code>) finden sich 3 <code>Buttons</code>, welche jeweils über einen <code>Intent</code> die <code>GameActivity</code> starten. Dabei soll der <code>Intent</code> über ein <code>Extra</code> den Parameter <code>speed</code> übergeben. Der Parameter bestimmt dabei wie schnell sich die Schlange bewegen soll. Jenachdem welcher der 3 <code>Buttons</code> geklickt wurde, ist dies eben ein anderer Wert.</p> <p>Die <code>GameActivity</code> enthält das entsprechende Spiel. Dabei soll eine eigene <code>View</code> implementiert werden, welche die Schlange enthält. Es gibt unten 4 <code>Buttons</code> welche die Bewegung der Schlange ermöglichen. Oben findet sich ebenfalls noch ein dynamisches Textfeld, welches für jede Bewegung, welche die Schlange macht um eins hochgezählt wird.</p> <p>Falls das Schlange an den Rand oder an einen Teil ihres Körpers gespielt wurde, ist das Spiel beendet. In diesem Fall soll die <code>GameOverActivity</code> geöffnet werden. Im <code>Intent</code> soll ein <code>Extra</code> mit der Anzahl der <code>moves</code> übergeben werden. Diese sollen auch in der <code>GameOverActivity</code> angezeigt werden. Es gibt ebenfalls einen <code>Button</code> zum <code>Restart</code> des Spieles. Dieser soll zur <code>MainActivity</code> leiten (über einen <code>Intent</code>).</p> <h2 id=projekt-clonen>Projekt clonen</h2> <p>Es steht eine Ausgangsbasis für das Projekt bereit. Dieses ist über Gitlab zu beziehen. Im Projekt finden sich alle Aufgaben als <code>TODOS</code> in Android Studio. Diese müssen Schritt für Schritt abgearbeitet werden um das Spiel zu realisieren.</p> <p><img alt="Snake Todos" src=../images/02-snake-todos.png title="Snake Todos"></p> <h2 id=klasse-snake>Klasse Snake</h2> <p>Innerhalb der Klasse <code>Snake</code> befindet sich die gesamte Spiellogik. Das Spielbrett ist als 2-dimensionales Array abgebildet. Im unten angeführten Beispiel wird beispielhaft ein Snake-Spiel innerhalb eines 6x6-Grid gezeigt. Dabei ist ein Apfel als <code>-1</code>, der Schlangenkopf als <code>-2</code> und die leeren Felder als <code>0</code> angezeigt. Der Schlangenkörper besteht aus Zahlen <code>größer 0</code> und erhöht sich in jedem Zug.</p> <style> 
+
+<!doctype html>
+<html lang="de" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Entwicklung und Betrieb mobiler Informationssysteme">
+      
+      
+      
+        <meta name="author" content="Stefan Huber">
+      
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.0.3">
+    
+    
+      
+        <title>Snake - Entwicklung und Betrieb mobiler Informationssysteme</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.1655a90d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.7fa14f5b.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+      
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#snake" class="md-skip">
+          Zum Inhalt
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Entwicklung und Betrieb mobiler Informationssysteme" class="md-header__button md-logo" aria-label="Entwicklung und Betrieb mobiler Informationssysteme">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M272 0H48C21.5 0 0 21.5 0 48v416c0 26.5 21.5 48 48 48h224c26.5 0 48-21.5 48-48V48c0-26.5-21.5-48-48-48zM160 480c-17.7 0-32-14.3-32-32s14.3-32 32-32 32 14.3 32 32-14.3 32-32 32zm112-108c0 6.6-5.4 12-12 12H60c-6.6 0-12-5.4-12-12V60c0-6.6 5.4-12 12-12h200c6.6 0 12 5.4 12 12v312z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Entwicklung und Betrieb mobiler Informationssysteme
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Snake
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="md-header__options">
+      
+    </div>
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Suche" placeholder="Suche" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Suche wird initialisiert
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.com/stefanhuber/ebmi/" title="Quellcode" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Entwicklung und Betrieb mobiler Informationssysteme" class="md-nav__button md-logo" aria-label="Entwicklung und Betrieb mobiler Informationssysteme">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M272 0H48C21.5 0 0 21.5 0 48v416c0 26.5 21.5 48 48 48h224c26.5 0 48-21.5 48-48V48c0-26.5-21.5-48-48-48zM160 480c-17.7 0-32-14.3-32-32s14.3-32 32-32 32 14.3 32 32-14.3 32-32 32zm112-108c0 6.6-5.4 12-12 12H60c-6.6 0-12-5.4-12-12V60c0-6.6 5.4-12 12-12h200c6.6 0 12 5.4 12 12v312z"/></svg>
+
+    </a>
+    Entwicklung und Betrieb mobiler Informationssysteme
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/stefanhuber/ebmi/" title="Quellcode" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      <label class="md-nav__link" for="__nav_2">
+        Mobile Web
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Mobile Web" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Mobile Web
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mobile-web/draggable-grid/" class="md-nav__link">
+        Draggable Grid
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mobile-web/fx-calculator/" class="md-nav__link">
+        Fx Calculator
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Inhaltsverzeichnis">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Inhaltsverzeichnis
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#projektubersicht" class="md-nav__link">
+    Projektübersicht
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#projekt-clonen" class="md-nav__link">
+    Projekt clonen
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#klasse-snake" class="md-nav__link">
+    Klasse Snake
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#eigene-view-klasse" class="md-nav__link">
+    Eigene View Klasse
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gameactivity-layout" class="md-nav__link">
+    GameActivity Layout
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/stefanhuber/ebmi/android/snake.md" title="Seite editieren" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                <h1 id="snake">Snake</h1>
+<h2 id="projektubersicht">Projektübersicht</h2>
+<p>Für das Projekt werden 3 <code>Activities</code> benötigt. Jeder Screen der App wird über eine <code>Activity</code> realisiert. Für jede <code>Activity</code> muss auch ein eigenes Layout als XML erstellt werden.</p>
+<div style="display:flex">
+    <img style="margin:3px; max-width:33%;" src="../images/02-snake-01.png" title="Snake 01" alt="Snake 01">
+    <img style="margin:3px; max-width:33%;" src="../images/02-snake-02.png" title="Snake 02" alt="Snake 02">
+    <img style="margin:3px; max-width:33%;" src="../images/02-snake-03.png" title="Snake 03" alt="Snake 03">
+</div>
+
+<p>Am Startscreen (<code>MainActivity</code>) finden sich 3 <code>Buttons</code>, welche jeweils über einen <code>Intent</code> die <code>GameActivity</code> starten. Dabei soll der <code>Intent</code> über ein <code>Extra</code> den Parameter <code>speed</code> übergeben. Der Parameter bestimmt dabei wie schnell sich die Schlange bewegen soll. Jenachdem welcher der 3 <code>Buttons</code> geklickt wurde, ist dies eben ein anderer Wert.</p>
+<p>Die <code>GameActivity</code> enthält das entsprechende Spiel. Dabei soll eine eigene <code>View</code> implementiert werden, welche die Schlange enthält. Es gibt unten 4 <code>Buttons</code> welche die Bewegung der Schlange ermöglichen. Oben findet sich ebenfalls noch ein dynamisches Textfeld, welches für jede Bewegung, welche die Schlange macht um eins hochgezählt wird.</p>
+<p>Falls das Schlange an den Rand oder an einen Teil ihres Körpers gespielt wurde, ist das Spiel beendet. In diesem Fall soll die <code>GameOverActivity</code> geöffnet werden. Im <code>Intent</code> soll ein <code>Extra</code> mit der Anzahl der <code>moves</code> übergeben werden. Diese sollen auch in der <code>GameOverActivity</code> angezeigt werden. Es gibt ebenfalls einen <code>Button</code> zum <code>Restart</code> des Spieles. Dieser soll zur <code>MainActivity</code> leiten (über einen <code>Intent</code>).</p>
+<h2 id="projekt-clonen">Projekt clonen</h2>
+<p>Es steht eine Ausgangsbasis für das Projekt bereit. Dieses ist über Gitlab zu beziehen. Im Projekt finden sich alle Aufgaben als <code>TODOS</code> in Android Studio. Diese müssen Schritt für Schritt abgearbeitet werden um das Spiel zu realisieren.</p>
+<p><img alt="Snake Todos" src="../images/02-snake-todos.png" title="Snake Todos" /></p>
+<h2 id="klasse-snake">Klasse Snake</h2>
+<p>Innerhalb der Klasse <code>Snake</code> befindet sich die gesamte Spiellogik. Das Spielbrett ist als 2-dimensionales Array abgebildet. Im unten angeführten Beispiel wird beispielhaft ein Snake-Spiel innerhalb eines 6x6-Grid gezeigt. Dabei ist ein Apfel als <code>-1</code>, der Schlangenkopf als <code>-2</code> und die leeren Felder als <code>0</code> angezeigt. Der Schlangenkörper besteht aus Zahlen <code>größer 0</code> und erhöht sich in jedem Zug.</p>
+<style> 
     #game {
         display:grid;
         grid-template-columns:1fr 1fr 1fr 1fr;
@@ -17,193 +376,635 @@
         justify-content:center;
         align-items:center;
     }
-</style> <section id=game> <div class=grid-description> <h2>Start</h2> <div class=grid> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>1</div> <div>-2</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>-1</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> </div> </div> <div class=grid-description> <h2>Bewegung nach Rechts</h2> <div class=grid> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>2</div> <div>-2</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>-1</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> </div> </div> <div class=grid-description> <h2>Bewegung nach Rechts</h2> <div class=grid> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>3</div> <div>-2</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>-1</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> </div> </div> <div class=grid-description> <h2>Bewegung nach Unten</h2> <div class=grid> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>3</div> <div>4</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>-2</div> <div>0</div> <div>0</div> <div>-1</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> </div> </div> <div class=grid-description> <h2>Bewegung nach Unten</h2> <div class=grid> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>4</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>5</div> <div>0</div> <div>0</div> <div>-1</div> <div>0</div> <div>0</div> <div>-2</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> </div> </div> <div class=grid-description> <h2>Bewegung nach Links</h2> <div class=grid> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>5</div> <div>0</div> <div>0</div> <div>-1</div> <div>0</div> <div>-2</div> <div>6</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> </div> </div> <div class=grid-description> <h2>Bewegung nach Links</h2> <div class=grid> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>-1</div> <div>-2</div> <div>7</div> <div>6</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> </div> </div> <div class=grid-description> <h2>Bewegung nach Links</h2> <div class=grid> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>-1</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>-2</div> <div>8</div> <div>7</div> <div>6</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> <div>0</div> </div> </div> </section> <div class=codehilite><pre><span></span><code><span class=kd>public</span> <span class=kd>class</span> <span class=nc>Snake</span> <span class=o>{</span>
+</style>
 
-    <span class=c1>// Konstanten für die unterschiedlichen Werte, welche in Zellen</span>
-    <span class=c1>// stehen können. Für den BODY der Schlange wird ein dynamischer</span>
-    <span class=c1>// Wert errechnet: Der BODY wird in jedem Zug um eins erhöht  </span>
-    <span class=kd>public</span> <span class=kd>static</span> <span class=kd>final</span> <span class=kt>int</span> <span class=n>CELL_EMPTY</span> <span class=o>=</span> <span class=mi>0</span><span class=o>;</span>
-    <span class=kd>public</span> <span class=kd>static</span> <span class=kd>final</span> <span class=kt>int</span> <span class=n>CELL_APPLE</span> <span class=o>=</span> <span class=o>-</span><span class=mi>1</span><span class=o>;</span>
-    <span class=kd>public</span> <span class=kd>static</span> <span class=kd>final</span> <span class=kt>int</span> <span class=n>CELL_HEAD</span> <span class=o>=</span> <span class=o>-</span><span class=mi>2</span><span class=o>;</span>
+<section id="game">
+<div class="grid-description">
+    <h2>Start</h2>
+    <div class="grid">
 
-    <span class=c1>// Die unterschiedlichen Änderungen, welche bei einem MOVE in</span>
-    <span class=c1>// die entsprechende Richtung die Koordinate geändert werden</span>
-    <span class=c1>// Zum Beispiel nach links wird die Koordinate x=-1 und y=0 geändert</span>
-    <span class=kd>public</span> <span class=kd>static</span> <span class=kd>final</span> <span class=kt>int</span><span class=o>[]</span> <span class=n>MOVE_LEFT</span> <span class=o>=</span> <span class=o>{-</span><span class=mi>1</span><span class=o>,</span> <span class=mi>0</span><span class=o>};</span>
-    <span class=kd>public</span> <span class=kd>static</span> <span class=kd>final</span> <span class=kt>int</span><span class=o>[]</span> <span class=n>MOVE_RIGHT</span> <span class=o>=</span> <span class=o>{</span><span class=mi>1</span><span class=o>,</span> <span class=mi>0</span><span class=o>};</span>
-    <span class=kd>public</span> <span class=kd>static</span> <span class=kd>final</span> <span class=kt>int</span><span class=o>[]</span> <span class=n>MOVE_UP</span> <span class=o>=</span> <span class=o>{</span><span class=mi>0</span><span class=o>,</span> <span class=o>-</span><span class=mi>1</span><span class=o>};</span>
-    <span class=kd>public</span> <span class=kd>static</span> <span class=kd>final</span> <span class=kt>int</span><span class=o>[]</span> <span class=n>MOVE_DOWN</span> <span class=o>=</span> <span class=o>{</span><span class=mi>0</span><span class=o>,</span> <span class=mi>1</span><span class=o>};</span>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
 
-    <span class=c1>// 2-dimensionales Spielfeld</span>
-    <span class=kd>public</span> <span class=kt>int</span><span class=o>[][]</span> <span class=n>grid</span><span class=o>;</span>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
 
-    <span class=c1>// Änderungskoordinate in jeden Spielzug</span>
-    <span class=c1>// diese wird durch die Methoden</span>
-    <span class=c1>// moveUp, moveDown, moveLeft, moveRight verändert</span>
-    <span class=kd>public</span> <span class=kt>int</span><span class=o>[]</span> <span class=n>move</span> <span class=o>=</span> <span class=o>{</span><span class=mi>1</span><span class=o>,</span><span class=mi>0</span><span class=o>};</span>
+        <div>0</div>
+        <div>1</div>
+        <div>-2</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
 
-    <span class=c1>// x/y Koordinate des Schlangenkopf</span>
-    <span class=kd>public</span> <span class=kt>int</span><span class=o>[]</span> <span class=n>head</span><span class=o>;</span> 
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>-1</div>
+        <div>0</div>
 
-    <span class=c1>// x/y Koordinate des Hinterteils der Schlange</span>
-    <span class=kd>public</span> <span class=kt>int</span><span class=o>[]</span> <span class=n>tail</span><span class=o>;</span> 
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
 
-    <span class=c1>// x/y Koordinate des Apfels</span>
-    <span class=kd>public</span> <span class=kt>int</span><span class=o>[]</span> <span class=n>apple</span><span class=o>;</span> 
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
 
-    <span class=c1>// Jede Bewegung des Kopfes erhöht</span>
-    <span class=c1>// diesen Wert um 1</span>
-    <span class=kd>public</span> <span class=kt>int</span> <span class=n>headMoves</span> <span class=o>=</span> <span class=mi>1</span><span class=o>;</span>
+    </div>
+</div>
 
-    <span class=kd>public</span> <span class=nf>Snake</span><span class=o>(</span><span class=kt>int</span> <span class=n>size</span><span class=o>)</span> <span class=o>{</span>
-        <span class=n>grid</span> <span class=o>=</span> <span class=k>new</span> <span class=kt>int</span><span class=o>[</span><span class=n>size</span><span class=o>][</span><span class=n>size</span><span class=o>];</span>
-    <span class=o>}</span>
+<div class="grid-description">
+    <h2>Bewegung nach Rechts</h2>
+    <div class="grid">
 
-    <span class=c1>// Diese Methode initialisiert das Spielfeld</span>
-    <span class=c1>// Die Schlange hat den Kopf und ein Körperteil</span>
-    <span class=kd>public</span> <span class=kt>void</span> <span class=nf>init</span><span class=o>()</span> <span class=o>{</span>
-        <span class=c1>// TODO: Zellen initialisieren</span>
-        <span class=c1>// Alle Zellen des Grids leer setzten (CELL_EMPTY)</span>
-        <span class=c1>// in der Mitte des Spielfeldes den Kopf setzen und links daneben den ersten Body</span>
-        <span class=c1>// Der Body hat im ersten Schritt den Wert 1</span>
-        <span class=c1>// dieser ist in der Variable headMoves zu finden</span>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
 
-        <span class=n>setApple</span><span class=o>();</span>
-    <span class=o>}</span>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
 
-    <span class=c1>// Diese Methode soll den Apfel zufällig setzen</span>
-    <span class=kd>public</span> <span class=kt>void</span> <span class=nf>setApple</span><span class=o>()</span> <span class=o>{</span>
-        <span class=c1>// TODO: Apfel zufällig setzen</span>
-        <span class=c1>// Zufällig eine freie Position (CELL_EMPTY) suchen und Apfel (CELL_APPLE) positionieren</span>
-        <span class=c1>// x/y für den Apfel in der Variable apple setzen</span>
-    <span class=o>}</span>
+        <div>0</div>
+        <div>0</div>
+        <div>2</div>
+        <div>-2</div>
+        <div>0</div>
+        <div>0</div>
+
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>-1</div>
+        <div>0</div>
+
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+
+    </div>
+</div>
+
+<div class="grid-description">
+    <h2>Bewegung nach Rechts</h2>
+    <div class="grid">
+
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>3</div>
+        <div>-2</div>
+        <div>0</div>
+
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>-1</div>
+        <div>0</div>
+
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+
+    </div>
+</div>
+
+<div class="grid-description">
+    <h2>Bewegung nach Unten</h2>
+    <div class="grid">
+
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>3</div>
+        <div>4</div>
+        <div>0</div>
+
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>-2</div>
+        <div>0</div>
+
+        <div>0</div>
+        <div>-1</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+
+    </div>
+</div>
+
+<div class="grid-description">
+    <h2>Bewegung nach Unten</h2>
+    <div class="grid">
+
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>4</div>
+        <div>0</div>
+
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>5</div>
+        <div>0</div>
+
+        <div>0</div>
+        <div>-1</div>
+        <div>0</div>
+        <div>0</div>
+        <div>-2</div>
+        <div>0</div>
+
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+
+    </div>
+</div>
+
+<div class="grid-description">
+    <h2>Bewegung nach Links</h2>
+    <div class="grid">
+
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>5</div>
+        <div>0</div>
+
+        <div>0</div>
+        <div>-1</div>
+        <div>0</div>
+        <div>-2</div>
+        <div>6</div>
+        <div>0</div>
+
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+
+    </div>
+</div>
+
+<div class="grid-description">
+    <h2>Bewegung nach Links</h2>
+    <div class="grid">
+
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+
+        <div>0</div>
+        <div>-1</div>
+        <div>-2</div>
+        <div>7</div>
+        <div>6</div>
+        <div>0</div>
+
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+
+    </div>
+</div>
+
+<div class="grid-description">
+    <h2>Bewegung nach Links</h2>
+    <div class="grid">
+
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>-1</div>
+        <div>0</div>
+        <div>0</div>
+
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+
+        <div>0</div>
+        <div>-2</div>
+        <div>8</div>
+        <div>7</div>
+        <div>6</div>
+        <div>0</div>
+
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+        <div>0</div>
+
+    </div>
+</div>
+
+</section>
+
+<div class="highlight"><pre><span></span><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Snake</span> <span class="p">{</span>
+
+    <span class="c1">// Konstanten für die unterschiedlichen Werte, welche in Zellen</span>
+    <span class="c1">// stehen können. Für den BODY der Schlange wird ein dynamischer</span>
+    <span class="c1">// Wert errechnet: Der BODY wird in jedem Zug um eins erhöht  </span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">CELL_EMPTY</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">CELL_APPLE</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">CELL_HEAD</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2</span><span class="p">;</span>
+
+    <span class="c1">// Die unterschiedlichen Änderungen, welche bei einem MOVE in</span>
+    <span class="c1">// die entsprechende Richtung die Koordinate geändert werden</span>
+    <span class="c1">// Zum Beispiel nach links wird die Koordinate x=-1 und y=0 geändert</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">MOVE_LEFT</span> <span class="o">=</span> <span class="p">{</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">};</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">MOVE_RIGHT</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">};</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">MOVE_UP</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">};</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">MOVE_DOWN</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">};</span>
+
+    <span class="c1">// 2-dimensionales Spielfeld</span>
+    <span class="kd">public</span> <span class="kt">int</span><span class="o">[][]</span> <span class="n">grid</span><span class="p">;</span>
+
+    <span class="c1">// Änderungskoordinate in jeden Spielzug</span>
+    <span class="c1">// diese wird durch die Methoden</span>
+    <span class="c1">// moveUp, moveDown, moveLeft, moveRight verändert</span>
+    <span class="kd">public</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">move</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">};</span>
+
+    <span class="c1">// x/y Koordinate des Schlangenkopf</span>
+    <span class="kd">public</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">head</span><span class="p">;</span> 
+
+    <span class="c1">// x/y Koordinate des Hinterteils der Schlange</span>
+    <span class="kd">public</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">tail</span><span class="p">;</span> 
+
+    <span class="c1">// x/y Koordinate des Apfels</span>
+    <span class="kd">public</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">apple</span><span class="p">;</span> 
+
+    <span class="c1">// Jede Bewegung des Kopfes erhöht</span>
+    <span class="c1">// diesen Wert um 1</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="n">headMoves</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+
+    <span class="kd">public</span> <span class="nf">Snake</span><span class="p">(</span><span class="kt">int</span> <span class="n">size</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">grid</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">size</span><span class="o">][</span><span class="n">size</span><span class="o">]</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Diese Methode initialisiert das Spielfeld</span>
+    <span class="c1">// Die Schlange hat den Kopf und ein Körperteil</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">init</span><span class="p">()</span> <span class="p">{</span>
+        <span class="c1">// TODO: Zellen initialisieren</span>
+        <span class="c1">// Alle Zellen des Grids leer setzten (CELL_EMPTY)</span>
+        <span class="c1">// in der Mitte des Spielfeldes den Kopf setzen und links daneben den ersten Body</span>
+        <span class="c1">// Der Body hat im ersten Schritt den Wert 1</span>
+        <span class="c1">// dieser ist in der Variable headMoves zu finden</span>
+
+        <span class="n">setApple</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Diese Methode soll den Apfel zufällig setzen</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setApple</span><span class="p">()</span> <span class="p">{</span>
+        <span class="c1">// TODO: Apfel zufällig setzen</span>
+        <span class="c1">// Zufällig eine freie Position (CELL_EMPTY) suchen und Apfel (CELL_APPLE) positionieren</span>
+        <span class="c1">// x/y für den Apfel in der Variable apple setzen</span>
+    <span class="p">}</span>
 
 
 
-    <span class=c1>// Diese Methode ist verantwortlich für die Durchführung des nächsten Spielzuges.    </span>
-    <span class=c1>// Diese Methode liefert true zurück falls der Spielzug gültig war und erfolgreich</span>
-    <span class=c1>// durchgeführt werden konnte. Diese Methode liefert false zurück wenn der Zug</span>
-    <span class=c1>// ungültig wäre. Ein Rückgabewert false bedeutet auch, dass das Spiel verloren wurde</span>
-    <span class=kd>public</span> <span class=kt>boolean</span> <span class=nf>next</span><span class=o>()</span> <span class=o>{</span>
-        <span class=c1>// der nächste Zug wird errechnet indem die aktuelle Position des head mit </span>
-        <span class=c1>// den Änderungskoordinaten in x und y Richtung addiert wird</span>
-        <span class=c1>// moveX und moveY stellen die nächsten Koordinaten, wohin die Schlange </span>
-        <span class=c1>// wandern würde dar        </span>
-        <span class=kt>int</span> <span class=n>moveX</span> <span class=o>=</span> <span class=n>head</span><span class=o>[</span><span class=mi>0</span><span class=o>]</span> <span class=o>+</span> <span class=n>move</span><span class=o>[</span><span class=mi>0</span><span class=o>];</span>
-        <span class=kt>int</span> <span class=n>moveY</span> <span class=o>=</span> <span class=n>head</span><span class=o>[</span><span class=mi>1</span><span class=o>]</span> <span class=o>+</span> <span class=n>move</span><span class=o>[</span><span class=mi>1</span><span class=o>];</span>
+    <span class="c1">// Diese Methode ist verantwortlich für die Durchführung des nächsten Spielzuges.    </span>
+    <span class="c1">// Diese Methode liefert true zurück falls der Spielzug gültig war und erfolgreich</span>
+    <span class="c1">// durchgeführt werden konnte. Diese Methode liefert false zurück wenn der Zug</span>
+    <span class="c1">// ungültig wäre. Ein Rückgabewert false bedeutet auch, dass das Spiel verloren wurde</span>
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">next</span><span class="p">()</span> <span class="p">{</span>
+        <span class="c1">// der nächste Zug wird errechnet indem die aktuelle Position des head mit </span>
+        <span class="c1">// den Änderungskoordinaten in x und y Richtung addiert wird</span>
+        <span class="c1">// moveX und moveY stellen die nächsten Koordinaten, wohin die Schlange </span>
+        <span class="c1">// wandern würde dar        </span>
+        <span class="kt">int</span> <span class="n">moveX</span> <span class="o">=</span> <span class="n">head</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">+</span> <span class="n">move</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">;</span>
+        <span class="kt">int</span> <span class="n">moveY</span> <span class="o">=</span> <span class="n">head</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="o">+</span> <span class="n">move</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span><span class="p">;</span>
 
-        <span class=c1>// TODO: Gültige Bewegung (innerhalb des Spielfeldes)</span>
-        <span class=c1>// Prüfen ob die Bewegung außerhalb des Spielfelds führen würde</span>
-        <span class=c1>// return false falls dies der Fall wäre</span>
+        <span class="c1">// TODO: Gültige Bewegung (innerhalb des Spielfeldes)</span>
+        <span class="c1">// Prüfen ob die Bewegung außerhalb des Spielfelds führen würde</span>
+        <span class="c1">// return false falls dies der Fall wäre</span>
 
-        <span class=c1>// TODO: Gültige Bewegung (Teil der Schlange)</span>
-        <span class=c1>// Prüfen ob nächster Zug Teil der Schlange ist</span>
-        <span class=c1>// return false falls dies der Fall wäre</span>
+        <span class="c1">// TODO: Gültige Bewegung (Teil der Schlange)</span>
+        <span class="c1">// Prüfen ob nächster Zug Teil der Schlange ist</span>
+        <span class="c1">// return false falls dies der Fall wäre</span>
 
-        <span class=c1>// TODO: Ist der nächste Zug ein Apfel?</span>
-        <span class=c1>// Prüfen ob nächster Zug ein Apfel ist, dann soll:</span>
-        <span class=c1>// (1) nur der Kopf bewegt werden: auf die neue Position</span>
-        <span class=c1>// (2) headMoves + 1 und im Spielfeld ein neues Körperteil (mit neuem headMoves Wert) anstelle des Kopfs setzen</span>
-        <span class=c1>// (3) einen neuen Apfel zufällig auf ein leeres Feld positionieren</span>
-        <span class=c1>// (4) return true</span>
+        <span class="c1">// TODO: Ist der nächste Zug ein Apfel?</span>
+        <span class="c1">// Prüfen ob nächster Zug ein Apfel ist, dann soll:</span>
+        <span class="c1">// (1) nur der Kopf bewegt werden: auf die neue Position</span>
+        <span class="c1">// (2) headMoves + 1 und im Spielfeld ein neues Körperteil (mit neuem headMoves Wert) anstelle des Kopfs setzen</span>
+        <span class="c1">// (3) einen neuen Apfel zufällig auf ein leeres Feld positionieren</span>
+        <span class="c1">// (4) return true</span>
 
-        <span class=c1>// TODO: Ist der nächste Zug ein leeres Feld?</span>
-        <span class=c1>// Prüfen ob nächster Zug ein leeres Feld ist, dann soll: </span>
-        <span class=c1>// (1) der Kopf bewegt werden</span>
-        <span class=c1>// (2) im Spielfeld ein neues Körperteil anstelle des Kopfs und Kopfs weiterbewegen</span>
-        <span class=c1>// (3) Schwanzteil eliminieren und tail auf vorletztes Teil setzen (vorletztes Teil über headMoves + 1 erkennen)</span>
-        <span class=c1>// (4) return true</span>
+        <span class="c1">// TODO: Ist der nächste Zug ein leeres Feld?</span>
+        <span class="c1">// Prüfen ob nächster Zug ein leeres Feld ist, dann soll: </span>
+        <span class="c1">// (1) der Kopf bewegt werden</span>
+        <span class="c1">// (2) im Spielfeld ein neues Körperteil anstelle des Kopfs und Kopfs weiterbewegen</span>
+        <span class="c1">// (3) Schwanzteil eliminieren und tail auf vorletztes Teil setzen (vorletztes Teil über headMoves + 1 erkennen)</span>
+        <span class="c1">// (4) return true</span>
 
-        <span class=k>return</span> <span class=kc>false</span><span class=o>;</span>
-    <span class=o>}</span>
+        <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+    <span class="p">}</span>
 
-    <span class=kd>public</span> <span class=kt>void</span> <span class=nf>moveUp</span><span class=o>()</span> <span class=o>{</span>
-        <span class=n>move</span> <span class=o>=</span> <span class=n>MOVE_UP</span><span class=o>;</span>
-    <span class=o>}</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">moveUp</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">move</span> <span class="o">=</span> <span class="n">MOVE_UP</span><span class="p">;</span>
+    <span class="p">}</span>
 
-    <span class=kd>public</span> <span class=kt>void</span> <span class=nf>moveDown</span><span class=o>()</span> <span class=o>{</span>
-        <span class=n>move</span> <span class=o>=</span> <span class=n>MOVE_DOWN</span><span class=o>;</span>
-    <span class=o>}</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">moveDown</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">move</span> <span class="o">=</span> <span class="n">MOVE_DOWN</span><span class="p">;</span>
+    <span class="p">}</span>
 
-    <span class=kd>public</span> <span class=kt>void</span> <span class=nf>moveLeft</span><span class=o>()</span> <span class=o>{</span>
-        <span class=n>move</span> <span class=o>=</span> <span class=n>MOVE_LEFT</span><span class=o>;</span>
-    <span class=o>}</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">moveLeft</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">move</span> <span class="o">=</span> <span class="n">MOVE_LEFT</span><span class="p">;</span>
+    <span class="p">}</span>
 
-    <span class=kd>public</span> <span class=kt>void</span> <span class=nf>moveRight</span><span class=o>()</span> <span class=o>{</span>
-        <span class=n>move</span> <span class=o>=</span> <span class=n>MOVE_RIGHT</span><span class=o>;</span>
-    <span class=o>}</span>
-<span class=o>}</span>
-</code></pre></div> <h2 id=eigene-view-klasse>Eigene View Klasse</h2> <p>Die Klasse <code>SnakeView</code> ist eine quadratische <code>View</code> und zeichnet das Spielfeld. Zum entsprechenden Interval wird die Methode <code>draw</code> aufgerufen mit dem Spielfeld aus der Klasse <code>Snake</code>. Innerhalb der Methode <code>onDraw</code> wird dann das Spielfeld auf der bereitgestellten <code>Canvas</code> neu gezeichnet.</p> <div class=codehilite><pre><span></span><code><span class=kd>public</span> <span class=kd>class</span> <span class=nc>SnakeView</span> <span class=kd>extends</span> <span class=n>View</span> <span class=o>{</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">moveRight</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">move</span> <span class="o">=</span> <span class="n">MOVE_RIGHT</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="eigene-view-klasse">Eigene View Klasse</h2>
+<p>Die Klasse <code>SnakeView</code> ist eine quadratische <code>View</code> und zeichnet das Spielfeld. Zum entsprechenden Interval wird die Methode <code>draw</code> aufgerufen mit dem Spielfeld aus der Klasse <code>Snake</code>. Innerhalb der Methode <code>onDraw</code> wird dann das Spielfeld auf der bereitgestellten <code>Canvas</code> neu gezeichnet.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SnakeView</span> <span class="kd">extends</span> <span class="n">View</span> <span class="p">{</span>
 
-    <span class=kd>protected</span> <span class=n>Paint</span> <span class=n>paintBackground</span><span class=o>;</span>
-    <span class=kd>protected</span> <span class=n>Paint</span> <span class=n>paintSnakeBody</span><span class=o>;</span>
-    <span class=kd>protected</span> <span class=n>Paint</span> <span class=n>paintSnakeHead</span><span class=o>;</span>
-    <span class=kd>protected</span> <span class=n>Paint</span> <span class=n>paintApple</span><span class=o>;</span>
+    <span class="kd">protected</span> <span class="n">Paint</span> <span class="n">paintBackground</span><span class="p">;</span>
+    <span class="kd">protected</span> <span class="n">Paint</span> <span class="n">paintSnakeBody</span><span class="p">;</span>
+    <span class="kd">protected</span> <span class="n">Paint</span> <span class="n">paintSnakeHead</span><span class="p">;</span>
+    <span class="kd">protected</span> <span class="n">Paint</span> <span class="n">paintApple</span><span class="p">;</span>
 
-    <span class=kd>protected</span> <span class=kt>int</span><span class=o>[][]</span> <span class=n>grid</span><span class=o>;</span>
+    <span class="kd">protected</span> <span class="kt">int</span><span class="o">[][]</span> <span class="n">grid</span><span class="p">;</span>
 
-    <span class=kd>public</span> <span class=nf>SnakeView</span><span class=o>(</span><span class=n>Context</span> <span class=n>context</span><span class=o>,</span> <span class=nd>@Nullable</span> <span class=n>AttributeSet</span> <span class=n>attrs</span><span class=o>)</span> <span class=o>{</span>
-        <span class=kd>super</span><span class=o>(</span><span class=n>context</span><span class=o>,</span> <span class=n>attrs</span><span class=o>);</span>
+    <span class="kd">public</span> <span class="nf">SnakeView</span><span class="p">(</span><span class="n">Context</span> <span class="n">context</span><span class="p">,</span> <span class="nd">@Nullable</span> <span class="n">AttributeSet</span> <span class="n">attrs</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">super</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">attrs</span><span class="p">);</span>
 
-        <span class=c1>// TODO: Zeichenstifte erzeugen</span>
-        <span class=c1>// die 4 Zeichenstifte (Paint) sollen erzeugt werden:</span>
-        <span class=c1>// Background=Grün, Apfel=Rot</span>
-        <span class=c1>// Schlangenkopf=Dunkelgrau, Schlangenkörper=Hellgrau</span>
-    <span class=o>}</span>
+        <span class="c1">// TODO: Zeichenstifte erzeugen</span>
+        <span class="c1">// die 4 Zeichenstifte (Paint) sollen erzeugt werden:</span>
+        <span class="c1">// Background=Grün, Apfel=Rot</span>
+        <span class="c1">// Schlangenkopf=Dunkelgrau, Schlangenkörper=Hellgrau</span>
+    <span class="p">}</span>
 
-    <span class=kd>public</span> <span class=kt>void</span> <span class=nf>draw</span><span class=o>(</span><span class=kt>int</span><span class=o>[][]</span> <span class=n>grid</span><span class=o>)</span> <span class=o>{</span>
-        <span class=k>this</span><span class=o>.</span><span class=na>grid</span> <span class=o>=</span> <span class=n>grid</span><span class=o>;</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">draw</span><span class="p">(</span><span class="kt">int</span><span class="o">[][]</span> <span class="n">grid</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="na">grid</span> <span class="o">=</span> <span class="n">grid</span><span class="p">;</span>
 
-        <span class=c1>// Durch den Aufruf der Methode invalidate, wird das</span>
-        <span class=c1>// Neuzeichnen der View zum nächsten möglichen Zeitpunk gefordert</span>
-        <span class=c1>// Wann dies genau passiert wird dann vom Betriebssystem entschieden</span>
-        <span class=n>invalidate</span><span class=o>();</span>
-    <span class=o>}</span>
+        <span class="c1">// Durch den Aufruf der Methode invalidate, wird das</span>
+        <span class="c1">// Neuzeichnen der View zum nächsten möglichen Zeitpunk gefordert</span>
+        <span class="c1">// Wann dies genau passiert wird dann vom Betriebssystem entschieden</span>
+        <span class="n">invalidate</span><span class="p">();</span>
+    <span class="p">}</span>
 
-    <span class=nd>@Override</span>
-    <span class=kd>protected</span> <span class=kt>void</span> <span class=nf>onMeasure</span><span class=o>(</span><span class=kt>int</span> <span class=n>widthMeasureSpec</span><span class=o>,</span> <span class=kt>int</span> <span class=n>heightMeasureSpec</span><span class=o>)</span> <span class=o>{</span>
-        <span class=c1>// in dieser Methode wird festgelegt, dass die View immer</span>
-        <span class=c1>// eine quadratische Grundfläche hat, hier muss nichts verändert werden</span>
-        <span class=kt>int</span> <span class=n>parentWidth</span> <span class=o>=</span> <span class=n>MeasureSpec</span><span class=o>.</span><span class=na>getSize</span><span class=o>(</span><span class=n>widthMeasureSpec</span><span class=o>);</span>
-        <span class=n>setMeasuredDimension</span><span class=o>(</span><span class=n>parentWidth</span><span class=o>,</span> <span class=n>parentWidth</span><span class=o>);</span>
-    <span class=o>}</span>
+    <span class="nd">@Override</span>
+    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">onMeasure</span><span class="p">(</span><span class="kt">int</span> <span class="n">widthMeasureSpec</span><span class="p">,</span> <span class="kt">int</span> <span class="n">heightMeasureSpec</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// in dieser Methode wird festgelegt, dass die View immer</span>
+        <span class="c1">// eine quadratische Grundfläche hat, hier muss nichts verändert werden</span>
+        <span class="kt">int</span> <span class="n">parentWidth</span> <span class="o">=</span> <span class="n">MeasureSpec</span><span class="p">.</span><span class="na">getSize</span><span class="p">(</span><span class="n">widthMeasureSpec</span><span class="p">);</span>
+        <span class="n">setMeasuredDimension</span><span class="p">(</span><span class="n">parentWidth</span><span class="p">,</span> <span class="n">parentWidth</span><span class="p">);</span>
+    <span class="p">}</span>
 
-    <span class=nd>@Override</span>
-    <span class=kd>protected</span> <span class=kt>void</span> <span class=nf>onDraw</span><span class=o>(</span><span class=n>Canvas</span> <span class=n>canvas</span><span class=o>)</span> <span class=o>{</span>
-        <span class=c1>// Eine invalidierte View wird nach Vorgabe vom Betriebssystem neu gezeichnet</span>
-        <span class=c1>// dafür wird die Methode onDraw aufgerufen und eine Canvas übergeben</span>
-        <span class=c1>// Das Canvas hat die Methode getWidth bzw. getHeight um die verfügbare</span>
-        <span class=c1>// Größe zu errechnen, die Größe einer Zelle kann dadurch errechnet werden</span>
+    <span class="nd">@Override</span>
+    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">onDraw</span><span class="p">(</span><span class="n">Canvas</span> <span class="n">canvas</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// Eine invalidierte View wird nach Vorgabe vom Betriebssystem neu gezeichnet</span>
+        <span class="c1">// dafür wird die Methode onDraw aufgerufen und eine Canvas übergeben</span>
+        <span class="c1">// Das Canvas hat die Methode getWidth bzw. getHeight um die verfügbare</span>
+        <span class="c1">// Größe zu errechnen, die Größe einer Zelle kann dadurch errechnet werden</span>
 
-        <span class=c1>// TODO: Spielfeld zeichnen</span>
-        <span class=c1>// (1) Der Hintergrund soll als Rechteck gezeichnet werden</span>
-        <span class=c1>// (2) Der Apfel als Roter Kreis</span>
-        <span class=c1>// (3) Der Kopf als Dunkelgrauer Kreis</span>
-        <span class=c1>// (4) Alle Körperteile als Hellgrauer Kreis</span>
-    <span class=o>}</span>
-<span class=o>}</span>
-</code></pre></div> <h2 id=gameactivity-layout>GameActivity Layout</h2> <p>Die Klasse <code>SnakeView</code> kann wie folgt im XML-Layout integriert werden. Es kann an allen Rändern eine Margin gesetzt werden. Falls der Hintergrund des Layouts Schwarz ist, entsteht der schwarze Rand um das Spielfeld (Ersichtlich im Screenshot).</p> <div class=codehilite><pre><span></span><code><span class=nt>&lt;fhku.snake.SnakeView</span>
-    <span class=na>android:id=</span><span class=s>&quot;@+id/snake_view&quot;</span>
-    <span class=na>android:layout_width=</span><span class=s>&quot;match_parent&quot;</span>
-    <span class=na>android:layout_height=</span><span class=s>&quot;wrap_content&quot;</span>
-    <span class=na>android:layout_marginStart=</span><span class=s>&quot;8dp&quot;</span>
-    <span class=na>android:layout_marginTop=</span><span class=s>&quot;8dp&quot;</span>
-    <span class=na>android:layout_marginEnd=</span><span class=s>&quot;8dp&quot;</span>
-    <span class=na>android:layout_marginBottom=</span><span class=s>&quot;8dp&quot;</span> <span class=nt>/&gt;</span>
-</code></pre></div> <p>Die <code>Buttons</code> zur Steuerung des Spiels können als <code>ImageButtons</code> erzeugt werden. Die Symbole, welche sich auf den <code>Buttons</code> befinden wurden als Vektorgrafiken bereitgestellt. Die 4 <code>Buttons</code> können dabei die selbe Grafik verwenden, müssen diese nur rotieren (Siehe Eigenschaft <code>rotation</code>). Dei 4 <code>Buttons</code> sollen dabei innerhalb eines horizontalen <code>LinearLayouts</code> gesetzt werden.</p> <div class=codehilite><pre><span></span><code><span class=nt>&lt;ImageButton</span>
-    <span class=na>android:id=</span><span class=s>&quot;@+id/button_left&quot;</span>
-    <span class=na>android:layout_width=</span><span class=s>&quot;wrap_content&quot;</span>
-    <span class=na>android:layout_height=</span><span class=s>&quot;wrap_content&quot;</span>
-    <span class=na>android:layout_weight=</span><span class=s>&quot;1&quot;</span>
-    <span class=na>android:background=</span><span class=s>&quot;#00FF00&quot;</span>
-    <span class=na>android:rotation=</span><span class=s>&quot;180&quot;</span>
-    <span class=na>app:srcCompat=</span><span class=s>&quot;@drawable/button&quot;</span> <span class=nt>/&gt;</span>
-</code></pre></div> </article> </div> </div> </main> <footer class=md-footer> <div class=md-footer-nav> <nav class="md-footer-nav__inner md-grid" aria-label=Footer> <a href=../sixteen-buttons/ title="Sixteen Buttons" class="md-footer-nav__link md-footer-nav__link--prev" rel=prev> <div class="md-footer-nav__button md-icon"> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg> </div> <div class=md-footer-nav__title> <div class=md-ellipsis> <span class=md-footer-nav__direction> Zurück </span> Sixteen Buttons </div> </div> </a> <a href=../../pwa/fx-calculator/ title="Fx Calculator" class="md-footer-nav__link md-footer-nav__link--next" rel=next> <div class=md-footer-nav__title> <div class=md-ellipsis> <span class=md-footer-nav__direction> Weiter </span> Fx Calculator </div> </div> <div class="md-footer-nav__button md-icon"> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg> </div> </a> </nav> </div> <div class="md-footer-meta md-typeset"> <div class="md-footer-meta__inner md-grid"> <div class=md-footer-copyright> <div class=md-footer-copyright__highlight> CC-BY-SA / Stefan Huber </div> Made with <a href=https://squidfunk.github.io/mkdocs-material/ target=_blank rel=noopener> Material for MkDocs </a> </div> </div> </div> </footer> </div> <script src=../../assets/javascripts/vendor.d710d30a.min.js></script> <script src=../../assets/javascripts/bundle.a14cc5fd.min.js></script><script id=__lang type=application/json>{"clipboard.copy": "In Zwischenablage kopieren", "clipboard.copied": "In Zwischenablage kopiert", "search.config.lang": "de", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Suchbegriff eingeben", "search.result.none": "Keine Suchergebnisse", "search.result.one": "1 Suchergebnis", "search.result.other": "# Suchergebnisse"}</script> <script>
-        app = initialize({
-          base: "../..",
-          features: ["tabs"],
-          search: Object.assign({
-            worker: "../../assets/javascripts/worker/search.7a2ea5ba.min.js"
-          }, typeof search !== "undefined" && search)
-        })
-      </script> </body> </html>
+        <span class="c1">// TODO: Spielfeld zeichnen</span>
+        <span class="c1">// (1) Der Hintergrund soll als Rechteck gezeichnet werden</span>
+        <span class="c1">// (2) Der Apfel als Roter Kreis</span>
+        <span class="c1">// (3) Der Kopf als Dunkelgrauer Kreis</span>
+        <span class="c1">// (4) Alle Körperteile als Hellgrauer Kreis</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="gameactivity-layout">GameActivity Layout</h2>
+<p>Die Klasse <code>SnakeView</code> kann wie folgt im XML-Layout integriert werden. Es kann an allen Rändern eine Margin gesetzt werden. Falls der Hintergrund des Layouts Schwarz ist, entsteht der schwarze Rand um das Spielfeld (Ersichtlich im Screenshot).</p>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;fhku.snake.SnakeView</span>
+    <span class="na">android:id=</span><span class="s">&quot;@+id/snake_view&quot;</span>
+    <span class="na">android:layout_width=</span><span class="s">&quot;match_parent&quot;</span>
+    <span class="na">android:layout_height=</span><span class="s">&quot;wrap_content&quot;</span>
+    <span class="na">android:layout_marginStart=</span><span class="s">&quot;8dp&quot;</span>
+    <span class="na">android:layout_marginTop=</span><span class="s">&quot;8dp&quot;</span>
+    <span class="na">android:layout_marginEnd=</span><span class="s">&quot;8dp&quot;</span>
+    <span class="na">android:layout_marginBottom=</span><span class="s">&quot;8dp&quot;</span> <span class="nt">/&gt;</span>
+</code></pre></div>
+<p>Die <code>Buttons</code> zur Steuerung des Spiels können als <code>ImageButtons</code> erzeugt werden. Die Symbole, welche sich auf den <code>Buttons</code> befinden wurden als Vektorgrafiken bereitgestellt. Die 4 <code>Buttons</code> können dabei die selbe Grafik verwenden, müssen diese nur rotieren (Siehe Eigenschaft <code>rotation</code>). Dei 4 <code>Buttons</code> sollen dabei innerhalb eines horizontalen <code>LinearLayouts</code> gesetzt werden.</p>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;ImageButton</span>
+    <span class="na">android:id=</span><span class="s">&quot;@+id/button_left&quot;</span>
+    <span class="na">android:layout_width=</span><span class="s">&quot;wrap_content&quot;</span>
+    <span class="na">android:layout_height=</span><span class="s">&quot;wrap_content&quot;</span>
+    <span class="na">android:layout_weight=</span><span class="s">&quot;1&quot;</span>
+    <span class="na">android:background=</span><span class="s">&quot;#00FF00&quot;</span>
+    <span class="na">android:rotation=</span><span class="s">&quot;180&quot;</span>
+    <span class="na">app:srcCompat=</span><span class="s">&quot;@drawable/button&quot;</span> <span class="nt">/&gt;</span>
+</code></pre></div>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            CC-BY-SA / Stefan Huber
+          </div>
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["tabs"], "translations": {"clipboard.copy": "In Zwischenablage kopieren", "clipboard.copied": "In Zwischenablage kopiert", "search.config.lang": "de", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Suche", "search.result.placeholder": "Suchbegriff eingeben", "search.result.none": "Keine Suchergebnisse", "search.result.one": "1 Suchergebnis", "search.result.other": "# Suchergebnisse", "search.result.more.one": "1 weiteres Suchergebnis auf dieser Seite", "search.result.more.other": "# weitere Suchergebnisse auf dieser Seite", "search.result.term.missing": "Es fehlt"}, "search": "../../assets/javascripts/workers/search.fb4a9340.min.js", "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.ca5457b8.min.js"></script>
+      
+    
+  </body>
+</html>

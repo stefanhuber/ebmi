@@ -7,14 +7,9 @@ edit_uri: https://github.com/stefanhuber/ebmi
 
 nav:
   - Home: 'index.md'
-  - 'Android':
-    - 'Einführung': 'android/einführung.md'
-    - 'Grafische Benutzeroberflächen': 'android/grafische-benutzeroberflächen.md'
-    - 'Apps ausführen': 'android/apps-ausführen.md'
-    - 'Sixteen Buttons': 'android/sixteen-buttons.md'
-    - 'Snake': 'android/snake.md'
-  - 'PWA':
-    - 'Fx Calculator': 'pwa/fx-calculator.md'
+  - 'Mobile Web':
+    - 'Draggable Grid': 'mobile-web/draggable-grid.md'
+    - 'Fx Calculator': 'mobile-web/fx-calculator.md'
 
 theme:
   name: material
@@ -34,12 +29,15 @@ extra:
     language: de
 
 markdown_extensions:
-  - markdown.extensions.admonition
-  - markdown.extensions.codehilite:
-      guess_lang: false
+  - admonition
+  - pymdownx.superfences
+  - pymdownx.highlight
+  - pymdownx.superfences
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
 
 plugins:
-  - search
-  - minify:
-      minify_html: true
+  - search:
+      lang: de
   
