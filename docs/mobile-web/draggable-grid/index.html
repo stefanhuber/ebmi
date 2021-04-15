@@ -324,14 +324,14 @@
       
         <li class="md-nav__item">
   <a href="#aufgabe-1a" class="md-nav__link">
-    Aufgabe 1a:
+    Aufgabe 1a
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#aufgabe-1b" class="md-nav__link">
-    Aufgabe 1b:
+    Aufgabe 1b
   </a>
   
 </li>
@@ -372,21 +372,21 @@
       
         <li class="md-nav__item">
   <a href="#aufgabe-2a" class="md-nav__link">
-    Aufgabe 2a:
+    Aufgabe 2a
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#aufgabe-2b" class="md-nav__link">
-    Aufgabe 2b:
+    Aufgabe 2b
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#aufgabe-2c" class="md-nav__link">
-    Aufgabe 2c:
+    Aufgabe 2c
   </a>
   
 </li>
@@ -498,14 +498,14 @@
       
         <li class="md-nav__item">
   <a href="#aufgabe-1a" class="md-nav__link">
-    Aufgabe 1a:
+    Aufgabe 1a
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#aufgabe-1b" class="md-nav__link">
-    Aufgabe 1b:
+    Aufgabe 1b
   </a>
   
 </li>
@@ -546,21 +546,21 @@
       
         <li class="md-nav__item">
   <a href="#aufgabe-2a" class="md-nav__link">
-    Aufgabe 2a:
+    Aufgabe 2a
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#aufgabe-2b" class="md-nav__link">
-    Aufgabe 2b:
+    Aufgabe 2b
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#aufgabe-2c" class="md-nav__link">
-    Aufgabe 2c:
+    Aufgabe 2c
   </a>
   
 </li>
@@ -798,9 +798,9 @@
     <span class="c1">// TODO: HTML-Elemente tauschen</span>
 <span class="p">});</span>
 </code></pre></div>
-<h2 id="aufgabe-1a">Aufgabe 1a:</h2>
+<h2 id="aufgabe-1a">Aufgabe 1a</h2>
 <p>Das HTML-Element, welches gerade gezogen wird, soll beim <code>dragenter</code> Event die CSS-Klasse <code>dragover</code> nicht gesetzt bekommen.</p>
-<h2 id="aufgabe-1b">Aufgabe 1b:</h2>
+<h2 id="aufgabe-1b">Aufgabe 1b</h2>
 <p>Im <code>drop</code> Event wurde ein <code>TODO</code> hinterlegt, welches die beiden über die entsprechenden <code>data-index</code> Attribute identifizierbaren HTML-Elemente tauschen soll. Erstellen Sie dazu eine globale Funktion <code>swapItems</code>, welche die beiden Indizes <code>index1</code> und <code>index2</code> übergeben bekommt. Die Funktion soll dann die beiden HTML-Elemente im DOM austauschen. Dabei sollte nicht nur der Textinhalt getauscht werden, sondern tatsächlich die HTML-Elemente.</p>
 <blockquote>
 <p><em><strong>Hinweis:</strong> Für die DOM-API gibt es eine Vielzahl hilfreicher Funktionen, welche generell für Änderungen im DOM verwendet werden können. Im konkreten Fall, gibt es Funktionen wie zB <code>insertAdjacentElement</code>, <code>appendChild</code> oder <code>removeChild</code>, welche hier nützlich sein können. Ebenfalls gibt es zum jeweiligen DOM-Knoten (aka HTML-Element) wichtige und nützliche Attribute, im konkreten Fall zum Beispiel <code>previousElementSibling</code> oder <code>nextElementSibling</code>.</em> </p>
@@ -842,7 +842,7 @@
 <div class="highlight"><pre><span></span><code><span class="nx">$0</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">transform</span> <span class="o">=</span> <span class="s2">&quot;translate(15px, -15px)&quot;</span><span class="p">;</span>
 </code></pre></div>
 <p>Wichtig zu verstehen ist, dass der Platz an dem das HTML-Element vor dem Transformationsschritt gezeichnet wurde frei bleibt. Die umliegenden HTML-Element füllen den leeren Platz nicht auf. Das transformierte HTML-Element überdeckt die umliegenden HTML-Elemente. Aus diesem Grund ist generell nur die <code>Composite</code> Phase des Rendering Vorgangs im Web-Browser notwendig.</p>
-<p>Die Bewegung über JavaScript würde so enstehen, dass bei jedem <code>touchmove</code> Event die x/y Koordinaten für die Transformation am zu bewegenden HTML-Element (<code>translate(x, y)</code>) angepasst wird. Die <code>x</code> bzw. <code>y</code> Werte für die <code>translate</code> Funktion sollen dabei immer als Differenz zum initialen Wert der x/y Koordinaten des Touch Events gesetzt werden. Dies ist soll hoffentlich über die unten angeführte Grafik verständlich gemacht werden:</p>
+<p>Die Bewegung über JavaScript würde so enstehen, dass bei jedem <code>touchmove</code> Event die x/y Koordinaten für die Transformation am zu bewegenden HTML-Element (<code>translate(x, y)</code>) angepasst wird. Die <code>x</code> bzw. <code>y</code> Werte für die <code>translate</code> Funktion sollen dabei immer als Differenz zum initialen Wert der x/y Koordinaten des Touch Events gesetzt werden. Dies soll hoffentlich über die unten angeführte Grafik verständlich gemacht werden:</p>
 <p><img alt="Draggable" src="../images/draggable.svg" title="Draggable" /></p>
 <p>Der gesamte Drag and Drop Quellcode aus den vorangegangenen Abschnitten soll innerhalb einer Funktion <code>initDragAndDrop</code> hinterlegt werden. Die von Ihnen entwickelte globale Funktion <code>swapItems</code> soll nicht innerhalb der <code>initDragAndDrop</code> gesetzt werden, diese wird auch im Touch Handling wiederverwendet. Vorerst soll nur die <code>initTouch</code> Funktion ausgeführt werden.</p>
 <div class="highlight"><pre><span></span><code><span class="kd">function</span> <span class="nx">initDragAndDrop</span><span class="p">()</span> <span class="p">{</span>
@@ -868,7 +868,7 @@
         <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">transform</span> <span class="o">=</span> <span class="s2">&quot;translate(&quot;</span> <span class="o">+</span> <span class="nx">x</span> <span class="o">+</span> <span class="s2">&quot;px, &quot;</span> <span class="o">+</span> <span class="nx">y</span> <span class="o">+</span> <span class="s2">&quot;px)&quot;</span><span class="p">;</span> 
     <span class="p">});</span>
     <span class="nx">draggableItemsContainer</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;touchend&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-        <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">transform</span> <span class="o">=</span> <span class="s2">&quot;translate(0px, 0px)&quot;</span><span class="p">;</span>
+        <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">transform</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">;</span>
     <span class="p">});</span>
 <span class="p">}</span>
 
@@ -909,11 +909,11 @@
 <span class="nx">initTouch</span><span class="p">();</span>
 </code></pre></div>
 <p>Um die Funktionalität des Touch-Handlings ähnlich zum Drag and Drop herzustellen, müssen noch einige Kleinigkeiten gelöst werden. Dazu sollen die Aufgaben 2a, 2b und 2c abgearbeitet werden. </p>
-<h2 id="aufgabe-2a">Aufgabe 2a:</h2>
+<h2 id="aufgabe-2a">Aufgabe 2a</h2>
 <p>Mit dem <code>touchstart</code> soll die CSS-Klasse <code>dragged</code> am gezogenen HTML-Element gesetzt werden. Mit dem <code>touchend</code> Event soll diese Klasse wieder entfernt werden. Dies soll einen ähnlichen Effekt zeigen wie im Drag and Drop Beispiel.</p>
-<h2 id="aufgabe-2b">Aufgabe 2b:</h2>
+<h2 id="aufgabe-2b">Aufgabe 2b</h2>
 <p>Die CSS-Klasse <code>dragover</code> soll ebenfalls bei den HTML-Elementen gesetzt werden, über welche das gezogenen HTML-Element fährt. Dabei muss im <code>touchmove</code> Event das HTML-Element bestimmt werden, über das gerade gezogen wird. Dazu kann wiederum die bekannte Funktion <code>elementsFromPoint</code> verwendet werden. Es gibt kein <code>dragenter</code> bzw. <code>dragleave</code> Event, welches im Touch-Handling verfügbar ist. Sie müssen sich eine entsprechende Logik überlegen, wie innerhalb des <code>touchmove</code> Events die CSS-Klasse <code>dragover</code> gesetzt bzw. entfernt wird, sodass der entsprechende Effekt gewährleistet ist.</p>
-<h2 id="aufgabe-2c">Aufgabe 2c:</h2>
+<h2 id="aufgabe-2c">Aufgabe 2c</h2>
 <p>Am Smartphone bzw. Tablet soll im JavaScript die Funktion <code>initTouch</code> ausgeführt werden, sodass das Drag and Drop funktioniert. Am Desktop bzw. Laptop soll die Funktion <code>initDragAndDrop</code> ausgeführt werden. Die entsprechenden Funktionen müssen also konditional geladen werden, jenachdem welche Funktionen der Web-Browser unterstützt (Touch-Handling oder Drag and Drop). Recherchieren Sie einen geeigneten Weg um dies zu bewerkstelligen. </p>
                 
               

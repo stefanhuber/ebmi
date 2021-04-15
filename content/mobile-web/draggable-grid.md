@@ -226,11 +226,11 @@ draggableItemsContainer.addEventListener('drop', (e) => {
 });
 ```
 
-## Aufgabe 1a:
+## Aufgabe 1a
 
 Das HTML-Element, welches gerade gezogen wird, soll beim `dragenter` Event die CSS-Klasse `dragover` nicht gesetzt bekommen.
 
-## Aufgabe 1b:
+## Aufgabe 1b
 
 Im `drop` Event wurde ein `TODO` hinterlegt, welches die beiden über die entsprechenden `data-index` Attribute identifizierbaren HTML-Elemente tauschen soll. Erstellen Sie dazu eine globale Funktion `swapItems`, welche die beiden Indizes `index1` und `index2` übergeben bekommt. Die Funktion soll dann die beiden HTML-Elemente im DOM austauschen. Dabei sollte nicht nur der Textinhalt getauscht werden, sondern tatsächlich die HTML-Elemente.
 
@@ -265,7 +265,7 @@ $0.style.transform = "translate(15px, -15px)";
 
 Wichtig zu verstehen ist, dass der Platz an dem das HTML-Element vor dem Transformationsschritt gezeichnet wurde frei bleibt. Die umliegenden HTML-Element füllen den leeren Platz nicht auf. Das transformierte HTML-Element überdeckt die umliegenden HTML-Elemente. Aus diesem Grund ist generell nur die `Composite` Phase des Rendering Vorgangs im Web-Browser notwendig.
 
-Die Bewegung über JavaScript würde so enstehen, dass bei jedem `touchmove` Event die x/y Koordinaten für die Transformation am zu bewegenden HTML-Element (`translate(x, y)`) angepasst wird. Die `x` bzw. `y` Werte für die `translate` Funktion sollen dabei immer als Differenz zum initialen Wert der x/y Koordinaten des Touch Events gesetzt werden. Dies ist soll hoffentlich über die unten angeführte Grafik verständlich gemacht werden:
+Die Bewegung über JavaScript würde so enstehen, dass bei jedem `touchmove` Event die x/y Koordinaten für die Transformation am zu bewegenden HTML-Element (`translate(x, y)`) angepasst wird. Die `x` bzw. `y` Werte für die `translate` Funktion sollen dabei immer als Differenz zum initialen Wert der x/y Koordinaten des Touch Events gesetzt werden. Dies soll hoffentlich über die unten angeführte Grafik verständlich gemacht werden:
 
 ![Draggable](images/draggable.svg "Draggable")
 
@@ -295,7 +295,7 @@ function initTouch() {
         e.target.style.transform = "translate(" + x + "px, " + y + "px)"; 
     });
     draggableItemsContainer.addEventListener('touchend', (e) => {
-        e.target.style.transform = "translate(0px, 0px)";
+        e.target.style.transform = "";
     });
 }
 
@@ -344,14 +344,14 @@ initTouch();
 
 Um die Funktionalität des Touch-Handlings ähnlich zum Drag and Drop herzustellen, müssen noch einige Kleinigkeiten gelöst werden. Dazu sollen die Aufgaben 2a, 2b und 2c abgearbeitet werden. 
 
-## Aufgabe 2a:
+## Aufgabe 2a
 
 Mit dem `touchstart` soll die CSS-Klasse `dragged` am gezogenen HTML-Element gesetzt werden. Mit dem `touchend` Event soll diese Klasse wieder entfernt werden. Dies soll einen ähnlichen Effekt zeigen wie im Drag and Drop Beispiel.
 
-## Aufgabe 2b:
+## Aufgabe 2b
 
 Die CSS-Klasse `dragover` soll ebenfalls bei den HTML-Elementen gesetzt werden, über welche das gezogenen HTML-Element fährt. Dabei muss im `touchmove` Event das HTML-Element bestimmt werden, über das gerade gezogen wird. Dazu kann wiederum die bekannte Funktion `elementsFromPoint` verwendet werden. Es gibt kein `dragenter` bzw. `dragleave` Event, welches im Touch-Handling verfügbar ist. Sie müssen sich eine entsprechende Logik überlegen, wie innerhalb des `touchmove` Events die CSS-Klasse `dragover` gesetzt bzw. entfernt wird, sodass der entsprechende Effekt gewährleistet ist.
 
-## Aufgabe 2c:
+## Aufgabe 2c
 
 Am Smartphone bzw. Tablet soll im JavaScript die Funktion `initTouch` ausgeführt werden, sodass das Drag and Drop funktioniert. Am Desktop bzw. Laptop soll die Funktion `initDragAndDrop` ausgeführt werden. Die entsprechenden Funktionen müssen also konditional geladen werden, jenachdem welche Funktionen der Web-Browser unterstützt (Touch-Handling oder Drag and Drop). Recherchieren Sie einen geeigneten Weg um dies zu bewerkstelligen. 
