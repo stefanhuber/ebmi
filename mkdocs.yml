@@ -7,6 +7,9 @@ edit_uri: https://github.com/stefanhuber/ebmi
 
 nav:
   - Home: 'index.md'
+  #- 'Android':
+  #  - 'u1': 'android\sixteen-buttons.md'
+  #  - 'u2': 'android\snake.md'
   - 'Mobile Web':
     - 'Draggable Grid': 'mobile-web/draggable-grid.md'
     - 'Fx Calculator': 'mobile-web/fx-calculator.md'
