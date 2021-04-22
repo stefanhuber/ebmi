@@ -30,7 +30,7 @@ Es soll noch ein Ordner `docs` erstellt werden, welcher alle Projektdateien enh�
 !!! info "Hinweis"
     Für ein Deployment auf Github Pages sollten alle Dateien, welche zur App gehören im Ordner `docs` liegen. Dieser Ordner wird dann über einen Web-Server öffentlich bereitgestellt.
 
-Es soll ebenfalls 3 Bilder ([Icon 1](https://raw.githubusercontent.com/stefanhuber/fx-calculator/master/docs/icon16.png), [Icon 2](https://raw.githubusercontent.com/stefanhuber/fx-calculator/master/docs/icon512.png), [Icon 3](https://raw.githubusercontent.com/stefanhuber/fx-calculator/master/docs/icon192.png)) heruntergeladen werden und im Ordner `docs` abgelegt werden.
+Es sollen ebenfalls 4 Bilder ([Icon 1](https://raw.githubusercontent.com/stefanhuber/fx-calculator/master/docs/icon16.png), [Icon 2](https://raw.githubusercontent.com/stefanhuber/fx-calculator/master/docs/icon512.png), [Icon 3](https://raw.githubusercontent.com/stefanhuber/fx-calculator/master/docs/maskable-icon512.png), [Icon 4](https://raw.githubusercontent.com/stefanhuber/fx-calculator/master/docs/icon192.png)) heruntergeladen werden und im Ordner `docs` abgelegt werden.
 
 ## HTML/CSS
 
@@ -116,6 +116,12 @@ Diese beiden Quellcodeabschnitte sind jeweils in die Datei `docs/index.html` bzw
 
 ## Verhalten
 
+Das gesamte Verhalten der Applikation findet sich in der Datei `app.js`, welche entsprechend zu erstellen ist. Die Datei ist ebenfalls in das HTML-Dokument einzubinden:
+
+```html
+<script src="app.js" async></script>
+```
+
 ### Dropdown Inhalt füllen
 
 Es gibt zwei Dropdowns (`select`), welche noch keine Inhalte (`option`) haben. Da die beiden Dropdowns dieselben Inhalte haben, können diese dynamisch gefüllt werden.
@@ -131,6 +137,7 @@ document.querySelectorAll('select').forEach(element => {
         <option value="USD">USD</option>
         <option value="CHF">CHF</option>
         <option value="SEK">SEK</option>
+        <option value="BTC">BTC</option>
     `;
 });
 ```
@@ -154,12 +161,13 @@ Das Ergebnis des Aufrufes sieht folgendermaßen aus:
     "rates": {
         "USD": 1.130998,
         "SEK": 10.395589,
-        "CHF": 1.088433
+        "CHF": 1.088433,
+        "BTC": 0.000022
     }
 }
 ```
 
-Da die Fixer API mittlerweile einen `API-Key` benötigt und ab 1000 Aufrufen/Monat kostenpflichtig ist, soll die API [gemockt](https://en.wikipedia.org/wiki/Mock_object) werden. Dazu kann einfach eine Antwort der API als JSON-Dokument abgelegt und anstelle der richtigen API abgefragt werden. Es sollte dazu eine Datei `docs/fixer.json` angelegt werden und das JSON-Beispiel von oben hineikopiert werden.
+Da die Fixer API mittlerweile einen `API-Key` benötigt und ab 1000 Aufrufen/Monat kostenpflichtig ist, soll die API [gemockt](https://en.wikipedia.org/wiki/Mock_object) werden. Dazu kann einfach eine Antwort der API als JSON-Dokument abgelegt und anstelle der richtigen API abgefragt werden. Es sollte dazu eine Datei `docs/fixer.json` angelegt werden und das JSON-Beispiel von oben hineikopiert werden. Die Kurse können natürlich nach belieben angepasst werden.
 
 ```javascript
 // const fixerUri = 'https://data.fixer.io/api/latest?base=EUR&symbols=USD,SEK,CHF&access_key=API_KEY';
@@ -168,7 +176,7 @@ const fixerUri = "fixer.json";
 
 Um nun die tatsächliche Währungsumrechnung durchzuführen soll eine Function `convert` erstellt werden. Da diese Funktion immer den aktuellen Währungskurs über die API abfragen soll, wird diese als `async` deklariert. Als Übergabeparameter bekommt die Funktion den Ausgangswert (`inputValue`), die Ausgangswährung (`inputCurrency`) und die Zielwährung (`outputCurrency`). Als Rückgabewert soll die Funktion den Ausgangswert in die Zielwährung umrechnen.
 
-Da die Funktion als `async` deklariert ist, kann `await` für asynchrone Aufrufe wie zum Beispiel `fetch` verwendet werden. Im ersten Schritt wird also die Währungskurse über die Fixer API abgefragt und der Response-Body (welcher als String repräsentiert ist) in JSON umgewandelt (`response.json()`). Der Rest der Funktion führt die Währungsumrechnung durch:
+Da die Funktion als `async` deklariert ist, kann `await` für asynchrone Aufrufe wie zum Beispiel `fetch` verwendet werden. Im ersten Schritt werden also die Währungskurse über die Fixer API abgefragt und der Response-Body (welcher als String repräsentiert ist) in eine JSON-Repräsentation überführt (`response.json()`). Der Rest der Funktion führt die Währungsumrechnung durch:
 
 ```javascript
 async function convert(inputValue, inputCurrency, outputCurrency) {
@@ -210,7 +218,7 @@ Die App ist nun vollkommen funktionsfähig umgesetzt. Die Prüfung mit Lighthous
 
 ![Lighthouse Prüfung](images/lighthouse-1.png "Lighthouse Prüfung")
 
-Die fehlenden 100 bei den Best Practices resultieren daher, dass der lokale Web-Server kein `HTTP/2` unterstütz, dies wird über ein Deployment auf zum Beipsiel [Github Pages](https://pages.github.com/) beseitigt.
+Die fehlenden 100 bei den Best Practices resultieren daher, dass der lokale Web-Server kein `HTTP/2` unterstützt, dies wird über ein Deployment auf zum Beipsiel [Github Pages](https://pages.github.com/) beseitigt.
 
 Die PWA hat 3 Aspekte, welche mit Lighthouse geprüft werden:
 
@@ -218,7 +226,7 @@ Die PWA hat 3 Aspekte, welche mit Lighthouse geprüft werden:
  - Installable
  - PWA Optimized
 
-Alle diese Aspekte sind derzeit noch unzureichend untersützt.
+Zumindest `Installable` und `PWA Optimized` sind derzeit noch unzureichend unterstützt.
 
 ## Web-App Manifest
 
@@ -226,33 +234,39 @@ Für Web-Apps welche am Homescreen installierbar sein sollen, muss ein [Web-App 
 
 Das Web-App Manifest ist ein JSON-Dokument mit wichtigen Eigenschaften der App:
 
- - Jede PWA benötigt zumindest ein Icon, es können für unterschiedliche Ansichten (zB Android Recents) weitere Icons angegeben werden (`icons`)
+ - Jede PWA benötigt zumindest ein Icon, es können für unterschiedliche Ansichten (zB Android Recents) weitere Icons angegeben werden ([icons](https://developer.mozilla.org/en-US/docs/Web/Manifest/icons)). Ein Icon benötigt dabei eine Größenangabe (`sizes`), eine Typangabe (`types`) und eine Zweckangabe (`purpose`).
  - Jede PWA benötigt einen Titel (`name`), darüberhinaus kann auch ein Kurztitel als Abkürzung angegeben werden (`short_name`)
  - Es können Farbwerte für unterschiedliche Ansichten definiert werden (`background_color` oder `theme_color`)
  - Mit `display` wird definiert, ob Teile des Web-Browsers noch angezeigt wreden sollen oder nicht. `standalone` bedeutet die Addressleiste wird versteckt.
  - Mit `start_url` wird angegeben, welche URL der PWA geöffnet werden soll, wenn eine Benutzerin die App vom Homescreen startet.
- - Mit `scope` wird angegeben, welche Pfade Teil der PWA sind und welche nicht. Mit `/` wird angegen das alles unter der Baseurl Teil der PWA ist.
+ - Mit `scope` wird angegeben, welche Pfade Teil der PWA sind und welche nicht. Mit `/` wird angegen das alles unter der Baseurl Teil der PWA ist. Mit `./` wird angegeben das alles ab der relativen Baseurl Teil der PWA ist.
 
 ```json
 {
     "name": "Fx Calculator",
     "short_name": "Fx Calc",
     "display": "standalone",
-    "start_url": ".",
-    "scope": "/",
+    "start_url": "./",
+    "scope": "./",
     "background_color": "#cfc",
     "theme_color": "#cfc",
     "description": "Simple Fx Calculator based on fixer.io API",
     "icons": [
         {
+            "src": "maskable-icon512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "maskable"
+        }, {
             "src": "icon512.png",
             "sizes": "512x512",
-            "type": "image/png"
+            "type": "image/png",
+            "purpose": "any"
         }, {
             "src": "icon16.png",
             "sizes": "16x16",
             "type": "image/png",
-            "purpose": "badge"
+            "purpose": "any"
         }
     ]
 }
@@ -290,33 +304,35 @@ Für diesen Aspekt müssen einige allgemeine Einstellungen der PWA vorgenommen w
 <meta name="theme-color" content="#ccffcc">
 <link rel="apple-touch-icon" href="icon192.png">
 ```
-Um diesen Aspekt voll zu untersützten wird `HTTPs` benötigt. Dies wird erst durch ein Deployment auf zum Beispiel Github Pages ermöglicht.
+Um `PWA Optimized` voll zu untersützten wird `HTTPs` benötigt. Dies wird erst durch ein Deployment auf zum Beispiel Github Pages ermöglicht.
 
 ## Service Worker Implementierung
 
 Der `Service Worker` wurde über die Datei `sw.js` registriert. Dabei gibt es 2 wichtige Events, welche vom `Service Worker` bearbeitet werden können:
 
- - Install-Event: Dieses Event wird getriggert, wenn der `Service-Worker` das erstemal installiert wird. Dort können zum Beispiel alle Dateien, welche für die PWA benötigt werden bereits geladen und in einen Cache geladen werden.
- - Fetch-Event: Dieses Event wird immer getriggert, wenn die App einen HTTP-Request triggert. Der `Service Worker` fungiert dabei ähnlich wie ein Proxy und es können beliebige Strategien implementiert werden.
+ - `Install-Event`: Dieses Event wird getriggert, wenn der `Service-Worker` das erstemal installiert wird. Dort können zum Beispiel alle Dateien, welche für die PWA benötigt werden bereits geladen und in einen Cache geladen werden.
+ - `Fetch-Event`: Dieses Event wird immer getriggert, wenn die App einen HTTP-Request triggert. Der `Service Worker` fungiert dabei ähnlich wie ein Proxy und es können beliebige Strategien implementiert werden.
 
 ### Install-Event
 
 Mit dem Schlüsselwort `self` wird der `Service Worker` referenziert und damit können EventListener registriert werden. Der EventListener bekommt dabei ein Event vom Typ [`InstallEvent`](https://developer.mozilla.org/en-US/docs/Web/API/InstallEvent), welches die Methode `waitUntil` aufweist.
 
-An die Methode `waitUntil` kann eine asynchrone Funktion übergeben werden. Der `Service Worker` würde erst in den Status `installed` wechseln, wenn die übergebenen Funktion ihre Aufgabe beendet hat. Im unten angeführten Fall wird ein neuer Cache mit dem Namen `fxcalc-v1` erzeugt und es werden über die Methode `addAll` einige Ressourcen vom Netzwerk geladen und in den Cache gelegt.
+An die Methode `waitUntil` kann eine asynchrone Funktion übergeben werden. Der `Service Worker` würde erst in den Status `installed` wechseln, wenn die übergebenen Funktion ihre Aufgabe beendet hat. Im unten angeführten Fall wird ein neuer Cache mit dem Namen `fxcalc-v1` erzeugt und es werden über die Methode `addAll` einige Ressourcen vom Netzwerk geladen und in den Cache gelegt. Die Angaben der Ressourcen nutzen dabei relative Pfade, sodass es egal ist in welchem Ordner sich die PWA am Web-Server befindet.
 
 ```javascript
 self.addEventListener('install', (event) => {
     event.waitUntil(
         caches.open('fxcalc-v1')
             .then(cache => cache.addAll([
-                'index.html',
-                'app.js',
-                'icon512.png',
-                'icon192.png',
-                'icon16.png',
-                'fixer.json',
-                'manifest.webmanifest'
+                './',
+                './index.html',
+                './app.js',
+                './icon512.png',
+                './maskable-icon512.png',
+                './icon192.png',
+                './icon16.png',
+                './fixer.json',
+                './manifest.webmanifest'
             ]))
     );
 });
@@ -339,19 +355,19 @@ Im folgenden wird folgende Strategie implementiert:
 self.addEventListener('fetch', (event) => {
     event.respondWith(
         caches.open('fxcalc-v1').then((cache) => {
-            return fetch(event.request)
-                .then((response) => {
+            return fetch(event.request) // erzeug eine Anfrage an das Netzwerk
+                .then((response) => { // then: falls die Anfrage erfolgreich ist (online)
                     cache.put(event.request, response.clone());
                     return response;
                 })
-                .catch(() => cache.match(event.request));
+                .catch(() => cache.match(event.request)); // catch: falls die Anfrage nicht an das Netzwerk gestellt werden konnte (offline)
         })        
     );
 });
 ```
 
 !!! info "Hinweis"
-    Es können natürlich viele andere `Service Worker` Strategien implementiert werden. Die Website [serviceworke.rs](https://serviceworke.rs/) zeigt einige Strategien auf. Es können beliebige Strategien implementiert werden, welche natürlich komplett vom Use-Case abhängen.
+    Es können natürlich viele andere `Service Worker` Strategien implementiert werden. Die Website [serviceworke.rs](https://serviceworke.rs/) zeigt einige Strategien auf. Es können beliebige Strategien implementiert werden, welche natürlich komplett von Ihrem Use-Case abhängen.
 
 ## Finale Lighthouse Prüfung
 
@@ -359,4 +375,16 @@ Nachdem alle Komponenten der App inkl. Service Worker implementiert wurden, soll
 
 ![Lighthouse Prüfung](images/lighthouse-2.png "Lighthouse Prüfung")
 
-Eine vollständige Lösung des Projekt findet sich als App auf [Github Pages](https://stefanhuber.github.io/fx-calculator/) sowie der Quellcode innerhalb eines [Git-Repositories](https://github.com/stefanhuber/fx-calculator).
+Eine vollständige Lösung des Projekt bis zu diesem Punkt, findet sich als App auf [Github Pages](https://stefanhuber.github.io/fx-calculator/) sowie der Quellcode innerhalb eines [Git-Repositories](https://github.com/stefanhuber/fx-calculator).
+
+## Aufgabe: Installation Prompt
+
+Ähnlich wie im Beispiel der [Simple PWA](https://stefanhuber.github.io/mobile-web-demos/simple-pwa/) soll ein eigener Prompt-Mechanismus integriert werden, welcher die Benutzerin anfragt, ob die PWA installiert werden soll. Die grafische Darstellung des Prompt soll in etwa der Ansicht im Screenshot entsprechen:
+
+![FX-Calculator Install Prompt](images/screenshot-fx-calculator-prompt.png "FX-Calculator Install Prompt")
+
+Folgende Aspekte für den Prompt sind zu beachten:
+
+ - Es soll das Event `beforeinstallprompt` abgehört werden und der eigene Prompt wie im Screenshot dargestellt, soll angezeigt werden.
+ - Wenn die Benutzerin in der Anfrage `Yes` angibt, soll der Browser-Prompt gezeigt werden (Nutzung der Funktion `prompt` des [BeforeInstallPromptEvent](https://developer.mozilla.org/en-US/docs/Web/API/BeforeInstallPromptEvent)) und das eigene Prompt wieder geschlossen werden.
+ - Wenn die Benutzerin die Anfrage mit `No` beantwortet, soll nur das eigene Prompt geschlossen werden und sonst nichts passieren.
